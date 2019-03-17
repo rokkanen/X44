@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="CreateDotNetCommand.xsl"?>
+<SoftwareSystem id="%project%" description="App">
+  <Containers>
+    <Container id="%project%.Api" technology="webapi">
+      <Components>
+        <Component id="Newtonsoft.Json" technology="nuget"/>
+        <Component id="Swashbuckle.AspNetCore" technology="nuget"/>
+        <Component id="log4net" technology="nuget"/>
+      </Components>
+    </Container>
+    <Container id="%project%.Web" technology="razor">
+      <Components>
+        <Component id="Microsoft.VisualStudio.Web.CodeGeneration.Design" technology="nuget"/>
+        <Component id="Swashbuckle.AspNetCore" technology="nuget"/>
+        <Component id="log4net" technology="nuget"/>
+      </Components>
+    </Container>
+    <Container id="%project%.Business" technology="classlib"/>
+    <Container id="%project%.Business.Entities" technology="classlib">
+      <Components>
+        <Component id="Newtonsoft.Json" technology="nuget"/>
+      </Components>	
+    </Container>
+    <Container id="%project%.Model" technology=""/>
+    <Container id="%project%.Interfaces" technology="classlib">
+      <Components>
+        <Component id="Newtonsoft.Json" technology="nuget"/>
+      </Components>
+    </Container>
+    <Container id="%project%.Client.Services" technology="classlib">
+      <Components>
+        <Component id="Newtonsoft.Json" technology="nuget"/>
+        <Component id="ModernHttpClient" technology="nuget"/>
+      </Components>
+    </Container>
+    <Container id="%project%.Infrastructure" technology="classlib">
+      <Components>
+        <Component id="Microsoft.EntityFrameworkCore" technology="nuget"/>
+        <Component id="Microsoft.EntityFrameworkCore.SqlServer" technology="nuget"/>
+        <Component id="Microsoft.EntityFrameworkCore.Tools" technology="nuget"/>
+        <Component id="Microsoft.EntityFrameworkCore.Design" technology="nuget"/>
+        <Component id="Dapper" technology="nuget"/>
+        <Component id="log4net" technology="nuget"/>
+        <Component id="AutoMapper" technology="nuget"/>
+      </Components>
+    </Container>
+  </Containers>
+  <RelationShips>
+    <RelationShip sourceId="%project%.Api" targetId="%project%.Business"/>
+    <RelationShip sourceId="%project%.Api" targetId="%project%.Business.Entities"/>
+    <RelationShip sourceId="%project%.Api" targetId="%project%.Infrastructure"/>
+    <RelationShip sourceId="%project%.Web" targetId="%project%.Business"/>
+    <RelationShip sourceId="%project%.Web" targetId="%project%.Business.Entities"/>
+    <RelationShip sourceId="%project%.Web" targetId="%project%.Infrastructure"/>
+    <RelationShip sourceId="%project%.Business" targetId="%project%.Interfaces"/>
+    <RelationShip sourceId="%project%.Business" targetId="%project%.Business.Entities"/>
+    <RelationShip sourceId="%project%.Business" targetId="%project%.Infrastructure"/>
+    <RelationShip sourceId="%project%.Infrastructure" targetId="%project%.Interfaces"/>
+    <RelationShip sourceId="%project%.Infrastructure" targetId="%project%.Business.Entities"/>
+    <RelationShip sourceId="%project%.Client.Services" targetId="%project%.Business.Entities"/>
+  </RelationShips>
+</SoftwareSystem>
+ 

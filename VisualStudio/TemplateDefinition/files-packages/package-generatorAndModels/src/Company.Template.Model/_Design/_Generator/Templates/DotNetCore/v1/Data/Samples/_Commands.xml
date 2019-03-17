@@ -1,0 +1,14 @@
+﻿<?xml version='1.0' encoding='iso-8859-1'?>
+<?xml-stylesheet type="text/xsl" href="../Command.xsl"?>
+<CommandModel namespace="Nova.Data">
+  <Commands>
+    <Command name="SaveTimeSpentCommand" response="Int64" type="SqlServer"  connexion="connectionStringNova">
+      <Code>dbo.sp_timespent_command_submit</Code>
+      <Parameters>
+        <Parameter name="Date" type="DateTime"/>
+        <Parameter name="MissionId" type="string"/>
+        <Parameter name="TimeSpent" type="decimal"/>
+      </Parameters>
+    </Command>
+  </Commands>
+</CommandModel>

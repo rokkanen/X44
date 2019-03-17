@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../ApiClientProxy.xsl"?>
+<ApiModel namespace="Nova">
+  <Resources>
+    <!-- USERS -->
+    <Resource id="User" name="Users" routePrefix="v1">
+      <Operations>
+        <Operation id="GetUser" name="GetUserAsync" route="users/{UserAD}/{UserAD2}" responseItem="UserInfo" query="GetNovaUserQuery" httpMethod="HttpGet" version="" tags="">
+          <Summary>Obtient l'utilisateur NOVA à partir du login Active Directory (AD)</Summary>
+          <Parameters>
+            <Parameter name="UserAD" type="string" in="path"/>
+            <Parameter name="UserAD2" type="string" in="path"/>
+          </Parameters>
+        </Operation>
+        <Operation id="GetSearchUser" name="GetSearchUserAsync" route="users/search" urlpattern="clients/search?Name={0}&amp;StaffId={1}&amp;Perimeter={2}" responseItem="UserInfo" query="GetUsersByNameQuery" httpMethod="HttpGet" version="" tags="">
+          <Summary>Recherche un utilisateur par son nom</Summary>
+          <Parameters>
+            <Parameter name="Name" type="string" in="query"/>
+          </Parameters>
+        </Operation>
+      </Operations>
+    </Resource>
+    <!-- FACTURES -->
+    <Resource id="Bill" name="Bills" routePrefix="v1">
+      <Operations>
+        <Operation id="Bill_GetBills" name="GetBillsAsync" route="bills" responseItem="BillSummaryInfo" query="GetBillsQuery" httpMethod="HttpGet" version="" tags="">
+          <Summary>Obtient la liste des factures</Summary>
+          <Parameters>
+            <Parameter name="StaffId" type="String" in="query"/>
+            <Parameter name="Perimeter" type="String" in="query"/>
+            <Parameter name="IsJustUnpaid" type="bool" in="query" default='=false'/>
+            <Parameter name="ClientId" type="String" in="query" default='=""'/>
+            <Parameter name="MissionId" type="String" in="query" default='=""'/>
+            <Parameter name="ClientName" type="String" in="query" default='=""'/>
+          </Parameters>
+        </Operation>
+        <Operation id="Bill_GetBillDetails" name="GetBillDetailsAsync" route="bills/{BillNumber}" responseItem="GenericItemInfo" query="GetBillDetailsQuery" httpMethod="HttpGet" version="" tags="">
+          <Summary>Obtient le détail d'une facture (vision client et vision Fidal)</Summary>
+          <Parameters>
+            <Parameter name="BillNumber" type="String" in="path"/>
+            <Parameter name="Perimeter" type="String" in="query"/>
+            <Parameter name="StaffId" type="String" in="query" default='=""'/>
+          </Parameters>
+        </Operation>
+        <Operation id="Bill_GetBillStakeholders" name="GetBillStakeholders" route="bills/{BillNumber}/stakeholders" responseItem="StakeholderInfo" query="GetBillFullStakeholdersQuery" httpMethod="HttpGet" version="" tags="">
+          <Summary>Obtient la liste des intervenants dans le(s) mission(s) facturées</Summary>
+          <Parameters>
+            <Parameter name="BillNumber" type="String" in="path"/>
+            <Parameter name="StaffId" type="String" in="query" default='=""'/>
+          </Parameters>
+        </Operation>
+      </Operations>
+    </Resource>
+    <!-- MISSIONS -->
+    <Resource id="Mission" name="Missions" routePrefix="v1">
+      <Operations>
+        <Operation id="Mission_GetMissions" name="GetMissionsAsync" route="missions" responseItem="MissionSummaryInfo" query="GetMissionsQuery" httpMethod="HttpGet" version="" tags="" >
+          <Summary>Obtient la liste des missions d'un avocat en tant qu'intervenant, référant ou superviseur</Summary>
+          <Parameters>
+            <Parameter name="ClientId" type="String" in="query"/>
+            <Parameter name="Perimeter" type="string" in="query"/>
+            <Parameter name="StaffId" type="String" in="query" default='=""'/>
+          </Parameters>
+        </Operation>
+        <Operation id="Mission_GetFinancialSituation" name="GetFinancialSituationAsync" route="missions/{MissionId}/financialSituation" responseItem="GenericItemInfo" query="GetMissionFinancialSituationQuery" httpMethod="HttpGet" version="" tags="" >
+          <Summary>Obtient la situation financière d'une mission donnée</Summary>
+          <Parameters>
+            <Parameter name="MissionId" type="String" in="path"/>
+            <Parameter name="Perimeter" type="string" in="query"/>
+            <Parameter name="StaffId" type="String" in="query" default='=""'/>
+          </Parameters>
+        </Operation>
+        <Operation id="Mission_GetStakeholders" name="GetStakeholders" route="missions/{MissionId}/stakeholders" responseItem="GenericItemInfo" query="GetMissionStakeholdersQuery" httpMethod="HttpGet" version="" tags="" >
+          <Summary>Obtient les intervenants d'une mission donnée</Summary>
+          <Parameters>
+            <Parameter name="MissionId" type="String" in="path"/>
+            <Parameter name="Perimeter" type="string" in="query"/>
+            <Parameter name="StaffId" type="String" in="query" default='=""'/>
+          </Parameters>
+        </Operation>
+      </Operations>
+    </Resource>
+    <!-- CLIENTS -->
+    <Resource id="Client" name="Clients" routePrefix="v1">
+      <Operations>
+        <Operation id="Client_SearchClients" name="GetSearchClientsAsync"  route="clients/search" responseItem="ClientSummaryInfo" query="GetClientsSearchQuery" httpMethod="HttpGet" version="" tags="">
+          <Summary>Recherche un client par son nom (complet ou partiel)</Summary>
+          <Parameters>
+            Client_SearchClients
+            <Parameter name="Name" type="string" in="query"/>
+            <Parameter name="StaffId" type="string" in="query"/>
+            <Parameter name="Perimeter" type="string" in="query"/>
+          </Parameters>
+        </Operation>
+        <Operation id="Client_GetClients" name="GetClientsAsync"  route="clients" responseItem="ClientSummaryInfo" query="GetClientsQuery" httpMethod="HttpGet" version="" tags="">
+          <Summary>Obtient la liste des clients d'un avocat (intervenant, référant, superviseur)</Summary>
+          <Parameters>
+            <Parameter name="StaffId" type="string" in="query"/>
+            <Parameter name="Perimeter" type="string" in="query"/>
+          </Parameters>
+        </Operation>
+        <Operation id="Client_GetClientById" name="GetClientByIdAsync" route="clients/{ClientId}" responseItem="ClientSummaryInfo" query="GetClientInfoQuery" httpMethod="HttpGet" version="" tags="">
+          <Summary>Obtient les propriétés d'un client spécifié</Summary>
+          <Parameters>
+            <Parameter name="ClientId" type="string" in="path"/>
+            <Parameter name="Perimeter" type="String" in="query"/>
+            <Parameter name="StaffId" type="String" in="query" default='=""'/>
+          </Parameters>
+        </Operation>
+        <Operation id="Client_GetLegaInfo" name="GetClientLegalInfoAsync" route="clients/{ClientId}/legalinfo" responseItem="GenericItemInfo" query="GetClientDetailsQuery" httpMethod="HttpGet" version="" tags="">
+          <Summary>Obtient les informations légales d'un client spécifié</Summary>
+          <Parameters>
+            <Parameter name="ClientId" type="string" in="path"/>
+            <Parameter name="Perimeter" type="String" in="query"/>
+            <Parameter name="StaffId" type="String" in="query" default='=""'/>
+          </Parameters>
+        </Operation>
+        <Operation id="Client_GetFinancialSituation" name="GetFinancialSituationAsync" route="clients/{ClientId}/financialSituation" responseItem="GenericItemInfo" query="GetClientFinacialSittuationQuery" httpMethod="HttpGet" version="" tags="">
+          <Summary>Obtient la situation financière d'un client spécifié</Summary>
+          <Parameters>
+            <Parameter name="ClientId" type="string" in="query"/>
+            <Parameter name="Perimeter" type="string" in="query"/>
+            <Parameter name="StaffId" type="String" in="query" default='=""'/>
+          </Parameters>
+        </Operation>
+        <Operation id="Client_GetLawyerFees" name="GetLawyerFeesAsync" route="clients/{ClientId}/lawyerFees" responseItem="LawyerFeeInfo" query="GetLawyerFeesQuery" httpMethod="HttpGet" version="" tags="">
+          <Summary>Obtient le détails des honoraires par avocats pour un client donné</Summary>
+          <Parameters>
+            <Parameter name="ClientId" type="string" in="query"/>
+            <Parameter name="Perimeter" type="string" in="query"/>
+            <Parameter name="StaffId" type="String" in="query" default='=""'/>
+          </Parameters>
+        </Operation>
+        <Operation id="Client_GetMissions" name="Client_GetMissionsAsync" route="clients/{ClientId}/missions" responseItem="MissionSummaryInfo" query="GetMissionsQuery" httpMethod="HttpGet" version="" tags="">
+          <Summary>Obtient la liste des missions pour un client donné</Summary>
+          <Parameters>
+            <Parameter name="ClientId" type="string" in="query"/>
+            <Parameter name="Perimeter" type="string" in="query"/>
+            <Parameter name="StaffId" type="String" in="query" default='=""'/>
+          </Parameters>
+        </Operation>
+      </Operations>
+    </Resource>
+    <!-- TEMPS -->
+    <Resource id="Activity" name="Activity" routePrefix="v1">
+      <Operations>
+        <Operation id="Activity_SaveActivityTime" name="SaveActivityTimeAsync" route="activity" responseItem="bool" query="SaveTimeCommand" httpMethod="HttpPost" version="" tags="">
+          <Summary>Envoie les temps passés d'un avocat pour une date et une mission donnée</Summary>
+          <Parameters>
+            <Parameter name="StaffId" type="String" in="query"/>
+            <Parameter name="ClientId" type="string" in="query"/>
+            <Parameter name="MissionId" type="string" in="query"/>
+            <Parameter name="ActivityDate" type="DateTime" in="query"/>
+            <Parameter name="TimeSpent" type="decimal" in="query"/>
+            <Parameter name="IsInternationalActivity" type="Boolean" in="query"/>
+            <Parameter name="NatureId" type="string" in="query"/>
+            <Parameter name="Memo" type="string" in="query"/>
+            <Parameter name="GenericActivity" type="string" in="query" default='=""'/>
+          </Parameters>
+        </Operation>
+      </Operations>
+    </Resource>
+    <!-- LISTS -->
+    <Resource id="List" name="Lists" routePrefix="v1">
+      <Operations>
+        <Operation id="List_GetNatures" name="GetNaturesAsync" route="lists/natures" responseItem="NatureInfo" query="GetNaturesQuery" httpMethod="HttpGet" version="" tags="">
+          <Summary>Obtient la liste des natures de missions</Summary>
+        </Operation>
+        <Operation id="List_GetGenericActivites" name="GetGenericActivitesAsync" route="lists/genericActivities" responseItem="ItemInfo" query="GetGenericActivitesQuery" httpMethod="HttpGet" version="" tags="">
+          <Summary>Obtient la liste des activités génériques</Summary>
+        </Operation>
+      </Operations>
+    </Resource>
+  </Resources>
+</ApiModel>
+

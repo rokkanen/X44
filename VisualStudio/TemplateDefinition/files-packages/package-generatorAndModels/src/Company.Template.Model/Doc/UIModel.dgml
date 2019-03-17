@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph ZoomLevel="1.25" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="CancelSave" Bounds="311.280354923581,665.483832430297,138.53,41.92" Label="CancelSave&#xD;&#xA;=&gt; Notify: Result:False" UseManualLocation="True" />
+    <Node Id="ChangeTracker" Bounds="-31.3415380385268,601.454640270092,97.94,25.96" UseManualLocation="True" />
+    <Node Id="CollectionOfEntities(Dto)" Bounds="-265.796059672038,10.1345157730103,155.173333333333,25.96" Label="Collection of Entities(Dto)" UseManualLocation="True" />
+    <Node Id="ConfirmSave" Bounds="323.968903372763,545.313178150803,135.18,41.92" Label="ConfirmSave&#xD;&#xA;=&gt; Notify: Result:True" UseManualLocation="True" />
+    <Node Id="CreateCommand" Bounds="-70.2305316005092,-255.300688945848,143.98,41.92" Label="CreateCommand&#xD;&#xA;=&gt; Notify:CreateNotice" UseManualLocation="True" />
+    <Node Id="CreateNotice" Bounds="288.901723559008,-99.1716775001526,89.13,25.96" UseManualLocation="True" />
+    <Node Id="Delete" Bounds="617.785075658554,72.7767924348428,54.2166666666667,25.96" UseManualLocation="True" />
+    <Node Id="DeleteCommand" Bounds="109.909028804531,-276.448048808269,143.866666666667,41.92" Label="DeleteCommand&#xD;&#xA;=&gt; Notify:DeleteNotice" UseManualLocation="True" />
+    <Node Id="DeleteNotice" Bounds="291.397426147461,12.7485224998474,89.0166666666667,25.96" UseManualLocation="True" />
+    <Node Id="EntitiesViewModel" Bounds="-493.084597530672,46.3751926098131,97.9166666666667,25.96" Label="Business Entity" UseManualLocation="True" />
+    <Node Id="EntitiesViewModel1" Category="ViewModel" Bounds="-181.203400872214,-111.316548266442,195.396666666667,25.96" Label="EntityViewModel:ViewModelBase" UseManualLocation="True">
+      <Category Ref="VM" />
+    </Node>
+    <Node Id="Entity" Category="View" Bounds="2.58919093545654,86.2050781053694,172.993333333333,25.96" Label="EntityHomeView:UserControl" UseManualLocation="True" />
+    <Node Id="Entity1" Category="View" Bounds="1.39940116861385,360.353906093502,171.506666666667,25.96" Label="EntityDetailView:UserControl" UseManualLocation="True" />
+    <Node Id="Entity2" Bounds="-125.544694333066,599.706556743462,50,25.96" Label="Entity" UseManualLocation="True" />
+    <Node Id="EntityViewDetailModel:ViewModelBase" Category="VM" Bounds="-136.882314893273,464.41903771533,256.75,25.96" Label="EntityViewDetailModel:ViewModelDetailBase" UseManualLocation="True">
+      <Category Ref="ViewModel" />
+    </Node>
+    <Node Id="Ev" Bounds="273.656773100265,329.14888449574,95.8833333333333,25.96" Label="EventsHandler" UseManualLocation="True" />
+    <Node Id="Events" Bounds="168.379764284029,-36.8988237000844,54.0433333333333,25.96" UseManualLocation="True" />
+    <Node Id="Events1" Bounds="237.621695309056,448.055330963235,54.0433333333333,25.96" Label="Events" UseManualLocation="True" />
+    <Node Id="EventsHandler" Bounds="41.0563134305399,154.872085882101,95.8833333333333,25.96" UseManualLocation="True" />
+    <Node Id="GetAll" Bounds="618.933990162044,9.62598771786189,52.13,25.96" UseManualLocation="True" />
+    <Node Id="IService" Bounds="759.973754903837,64.8010770608446,60.49,25.96" UseManualLocation="True" />
+    <Node Id="IsNew" Bounds="-173.507239740412,535.523892040954,52.2133333333333,25.96" Label="IsNew" UseManualLocation="True" />
+    <Node Id="LoadEntities" Bounds="315.525531616211,-185.69945881958,84.03,25.96" UseManualLocation="True" />
+    <Node Id="Method" Bounds="176.492459532789,560.868347045542,67.1,25.96" Label="Methods" UseManualLocation="True" />
+    <Node Id="Methods" Bounds="146.820751659255,-190.00458152032,67.1,25.96" UseManualLocation="True" />
+    <Node Id="ModifyCommand=&gt;Notify:ModifyNotice" Bounds="308.493616536458,-257.61955881958,146.993333333333,41.92" Label="ModifyCommand&#xD;&#xA;=&gt; Notify:ModifyNotice" UseManualLocation="True" />
+    <Node Id="ModifyNotice" Bounds="290.04196105957,-43.2115775001526,92.1433333333333,25.96" UseManualLocation="True" />
+    <Node Id="OnCreate" Bounds="-95.6677081423942,239.752642354077,99.8733333333333,25.96" Label="OnCreateEntity" UseManualLocation="True" />
+    <Node Id="OnDeleteEntity" Bounds="168.562291857606,242.264741821289,99.76,25.96" UseManualLocation="True" />
+    <Node Id="OnDeletedComplete" Bounds="281.573943976983,70.8466380750071,128.496666666667,25.96" UseManualLocation="True" />
+    <Node Id="OnErrorNotice" Bounds="465.868892675492,332.958803688448,96.2566666666667,25.96" UseManualLocation="True" />
+    <Node Id="OnUpdateEntity" Bounds="34.2056251909392,240.654146118164,104.356666666667,25.96" UseManualLocation="True" />
+    <Node Id="Properties" Bounds="-120.226808929443,85.7658938598633,73.77,25.96" UseManualLocation="True" />
+    <Node Id="Property" Bounds="-50.1594543457031,534.381715999349,73.77,25.96" Label="Properties" UseManualLocation="True" />
+    <Node Id="ResultNotice" Bounds="340.122112357205,447.430413510641,86.76,25.96" UseManualLocation="True" />
+    <Node Id="SelectedEntity(Dto)" Bounds="-271.470142262777,66.0946157730103,121.243333333333,25.96" UseManualLocation="True" />
+    <Node Id="SelectedInde" Bounds="-256.608670569274,135.387916745156,93.62,25.96" Label="SelectedIndex" UseManualLocation="True" />
+    <Node Id="ShowDialogConfirmation" Bounds="298.322291857606,232.2988613343,101.943333333333,41.92" Label="ShowDialog&#xD;&#xA;(Confirmation?)" UseManualLocation="True" />
+  </Nodes>
+  <Links>
+    <Link Source="EntitiesViewModel" Target="EntitiesViewModel1" Bounds="-414.442635196756,-81.7507148684177,293.007850766317,128.125907478231" />
+    <Link Source="EntitiesViewModel" Target="EntityViewDetailModel:ViewModelBase" Bounds="-430.60056820117,72.3351926098131,402.073951883332,385.852225048076" />
+    <Link Source="EntitiesViewModel1" Target="Entity" Bounds="-72.1633716978729,-85.356548266442,143.985667020503,164.784348313126" Label="Reference" LabelBounds="1.33552360319742,-20.2403444295424,52.1966666666667,15.96" />
+    <Link Source="EntitiesViewModel1" Target="Events" Bounds="-34.8579693980794,-85.356548266442,194.541950436205,51.9076083295514" Label="Expose" LabelBounds="55.1706736684298,-79.3651091773168,37.03,15.96" />
+    <Link Source="EntitiesViewModel1" Target="Methods" Bounds="-39.977379889844,-164.448075324757,178.173537296663,53.1315270583153" />
+    <Link Source="EntitiesViewModel1" Target="Properties" Bounds="-83.4943152023069,-85.356548266442,0.134298543689255,162.122445214244" />
+    <Link Source="Entity" Target="Events" Bounds="100.295706533194,-4.1273774146678,78.0133420610371,90.3324555200372" Label="Subscribe" LabelBounds="140.816032293805,42.3460799954385,51.2633333333333,15.96" />
+    <Link Source="Entity" Target="EventsHandler" Bounds="89.0261092814093,112.165078105369,0.0431369952643479,33.707015146794" Label="Has" LabelBounds="93.0476777790428,121.041145202934,19.72,15.96" />
+    <Link Source="Entity" Target="Methods" Bounds="93.3756348911117,-155.499173958007,79.8811564833179,241.704252063377" Label="Call" LabelBounds="108.712696044689,-41.0844905379076,19.35,15.96" />
+    <Link Source="Entity" Target="Properties" Bounds="-37.4568381232011,98.8627658021042,40.0460290586576,0.101999785831481" Label="Bind" LabelBounds="-29.2605843713592,102.913765695041,23.6433333333333,15.96" />
+    <Link Source="Entity1" Target="Ev" Bounds="172.565386741598,349.697420632127,92.1700642669481,12.267952798992" />
+    <Link Source="Entity1" Target="Events1" Bounds="113.421730108707,386.313906093502,117.661928617625,58.1389504311218" Label="Subscribe" LabelBounds="173.138675169704,397.630328575103,51.2633333333333,15.96" />
+    <Link Source="Entity1" Target="Method" Bounds="95.107815559086,386.313906093502,102.27667750398,166.880923584098" Label="Call" LabelBounds="125.190928229311,470.799453532792,19.35,15.96" />
+    <Link Source="EntityViewDetailModel:ViewModelBase" Target="Entity1" Bounds="3.4243227436463,392.939818561297,65.7060201476012,71.4792191540333" Label="Reference" LabelBounds="-17.3917588420631,411.365927255251,52.1966666666667,15.96" />
+    <Link Source="EntityViewDetailModel:ViewModelBase" Target="Events1" Bounds="119.867685106727,463.192325164701,108.770116817172,6.51611892523681" />
+    <Link Source="EntityViewDetailModel:ViewModelBase" Target="Method" Bounds="20.9047782751505,490.37903771533,151.491749379429,66.855592211168" />
+    <Link Source="EntityViewDetailModel:ViewModelBase" Target="Property" Bounds="-11.7781927014801,490.37903771533,2.38644239763945,35.023498552005" />
+    <Link Source="Ev" Target="OnErrorNotice" Bounds="369.540106433598,343.078234954397,87.3305502951242,1.72933699935521" />
+    <Link Source="Events" Target="CreateNotice" Bounds="221.743621630101,-69.5113070654336,74.7410128748474,33.71112377119" />
+    <Link Source="Events" Target="DeleteNotice" Bounds="222.423097617362,-14.3706905291425,68.2628294458164,24.1207396351305" />
+    <Link Source="Events" Target="ModifyNotice" Bounds="222.423097617362,-27.7613098742428,58.6279068426991,2.63021650000724" />
+    <Link Source="Events" Target="OnDeletedComplete" Bounds="213.522496595423,-10.9388237000844,106.862068091354,76.5445957219063" />
+    <Link Source="Events1" Target="ResultNotice" Bounds="291.665028642389,460.68580845067,39.4572081051107,0.207452105094319" />
+    <Link Source="EventsHandler" Target="OnCreate" Bounds="-17.5133846244499,180.832085882101,85.9084990866502,54.1231660633688" />
+    <Link Source="EventsHandler" Target="OnDeleteEntity" Bounds="108.223705057656,180.832085882101,83.5336979929672,56.3966977671457" />
+    <Link Source="EventsHandler" Target="OnUpdateEntity" Bounds="87.0536239355168,180.832085882101,1.54881891388628,50.82623599645" />
+    <Link Source="IService" Target="Delete" Bounds="680.988218817472,79.4409768530855,78.9855360863647,4.33486774474423" />
+    <Link Source="IService" Target="GetAll" Bounds="679.477204378019,35.705709736661,80.834350919687,30.7123657850975" />
+    <Link Source="LoadEntities" Target="GetAll" Bounds="376.643064635173,-159.73945881958,241.809292708362,164.307247433574" />
+    <Link Source="Method" Target="CancelSave" Bounds="229.698021872699,586.828347045542,111.597491462447,73.6959550753403" />
+    <Link Source="Method" Target="ConfirmSave" Bounds="243.592459532789,569.469157986642,71.3842708948102,2.97905741769989" />
+    <Link Source="Methods" Target="CreateCommand" Bounds="75.6456342703209,-210.630723130565,71.2717143648582,22.8709920357982" />
+    <Link Source="Methods" Target="DeleteCommand" Bounds="180.614196215971,-225.529631326447,0.666285054112706,35.5250498061272" />
+    <Link Source="Methods" Target="LoadEntities" Bounds="213.920751659255,-176.209336016008,92.607435858774,2.25030687778579" />
+    <Link Source="Methods" Target="ModifyCommand=&gt;Notify:ModifyNotice" Bounds="213.920751659255,-213.163120230708,88.6305654239553,26.215127654575" />
+    <Link Source="OnCreate" Target="Entity1" Bounds="-31.4291066641907,265.712642354077,97.615401268869,88.5927621099096" Label="Create &amp; Show (new entity)" LabelBounds="-128.805517502982,311.490024539195,144.84,15.96" />
+    <Link Source="OnDeleteEntity" Target="ShowDialogConfirmation" Bounds="268.322291857606,254.169010266085,21.0010362992853,0.318723859280595" />
+    <Link Source="OnDeletedComplete" Target="Delete" Bounds="410.07061064365,84.2412859214851,198.714652442719,1.28247066381493" />
+    <Link Source="OnUpdateEntity" Target="Entity1" Bounds="86.4673230372197,266.614146118164,0.544245322901418,84.7399455899354" Label="Create &amp; show(SelectedEntity)" LabelBounds="90.7394456995211,300.991274106714,159.826666666667,15.96" />
+    <Link Source="Properties" Target="CollectionOfEntities(Dto)" Bounds="-162.912195895044,41.3590657552391,61.5728140568746,44.4068281046242" />
+    <Link Source="Properties" Target="SelectedEntity(Dto)" Bounds="-141.332039673435,89.7993659244416,21.1052307439921,3.25604044012546" />
+    <Link Source="Properties" Target="SelectedInde" Bounds="-168.342354448106,111.725893859863,51.9222877483312,20.3744495750866" />
+    <Link Source="Property" Target="ChangeTracker" Bounds="-7.29410000707295,560.341715999349,15.17609183351,32.938796072087" />
+    <Link Source="Property" Target="Entity2" Bounds="-75.9990959385842,560.341715999349,45.3841061681842,33.9715979717698" />
+    <Link Source="Property" Target="IsNew" Bounds="-112.294232715492,547.675817113242,62.1347783697891,0.529120322554832" />
+    <Link Source="ShowDialogConfirmation" Target="OnDeletedComplete" Bounds="346.272610751285,105.804749372974,2.59187552240365,126.494111961326" Label="Ok" LabelBounds="328.55854842439,161.112776930293,15.01,15.96" />
+  </Links>
+  <Categories>
+    <Category Id="VM" Label="ViewModel" Background="#FF0000FF" IsTag="True" />
+    <Category Id="View" Label="View" Background="#FFFFFF00" IsTag="True" />
+    <Category Id="ViewModel" />
+  </Categories>
+  <Properties>
+    <Property Id="Background" Label="Background" Description="The background color" DataType="System.Windows.Media.Brush" />
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="IsTag" DataType="System.Boolean" />
+    <Property Id="Label" Label="Étiquette" Description="Étiquette affichable d'un objet pouvant être annoté" DataType="System.String" />
+    <Property Id="LabelBounds" DataType="System.Windows.Rect" />
+    <Property Id="UseManualLocation" DataType="System.Boolean" />
+    <Property Id="ZoomLevel" DataType="System.String" />
+  </Properties>
+</DirectedGraph>

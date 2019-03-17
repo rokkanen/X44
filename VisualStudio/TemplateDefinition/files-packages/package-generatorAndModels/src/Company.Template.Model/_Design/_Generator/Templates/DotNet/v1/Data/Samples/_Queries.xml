@@ -1,0 +1,28 @@
+﻿<?xml version='1.0' encoding='iso-8859-1'?>
+<?xml-stylesheet type="text/xsl" href="../Query.xsl"?>
+<QueryModel namespace="Nova.Data">
+  <Queries>
+    <Query name="GetLawyerTimeAndCharges" resultType="ClientDTO" type="SqlServer" connexion="connectionStringNova">
+      <Code>Nova_HistoTempsFrais</Code>
+      <Comment>Obtenir l'historique des temps/frais pour un avocat</Comment>
+      <Parameters>
+        <Parameter name="LawyerId" mapping="@staff_numb" type="String"/>
+        <Parameter name="Perimeter" mapping="@requete" type="String" value='""'/>
+        <Parameter name="DataType" mapping="@type" type="Int64" value="1"/>
+        <Parameter name="BeginDate" mapping="@datedebut" type="DateTime"/>
+        <Parameter name="EndDate" mapping="@datefin" type="DateTime"/>
+      </Parameters>
+    </Query>
+    <Query name="GetLawyerCharges" resultType="ClientDTO" type="SqlServer" connexion="connectionStringNova">
+      <Code>Nova_HistoTempsFrais</Code>
+      <Comment>Obtenir les frais pour un avocat</Comment>
+      <Parameters>
+        <Parameter name="LawyerId" mapping="@staff_numb" type="String"/>
+        <Parameter name="Perimeter" mapping="@requete" type="String" value='"seul"'/>
+        <Parameter name="DataType" mapping="@type" type="Int64" value="2"/>
+        <Parameter name="BeginDate" mapping="@datedebut" type="DateTime"/>
+        <Parameter name="EndDate" mapping="@datefin" type="DateTime"/>
+      </Parameters>
+    </Query>
+  </Queries>
+</QueryModel>

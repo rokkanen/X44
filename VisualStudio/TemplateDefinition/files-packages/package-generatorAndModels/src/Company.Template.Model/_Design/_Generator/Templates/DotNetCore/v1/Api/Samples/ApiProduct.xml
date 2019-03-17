@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../ApiProduct.xsl"?>
+<ApiProduct namespace="BroadcastAPI">
+  <Entities>
+    <Entity name="Patrimoine" plural="Patrimoines"/>
+    <Entity name="Resource" plural="Resources" />
+    <Entity name="Tiers" plural="Tiers"/>
+    <Entity name="Contrat" plural="Contrats"/>
+    <Entity name="OT" plural="OTs"/>
+    <Entity name="Campagne" plural="Campagnes"/>
+  </Entities>    
+</ApiProduct>

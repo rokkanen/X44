@@ -1,0 +1,14 @@
+{
+  "ProjectFilePath": "c:\\_git\\X44\\VisualStudio\\TemplateDefinition\\files-packages\\package-generatorAndModels\\src\\Company.Template.Model\\Company.Template.Model.csproj",
+  "TargetFramework": "v4.6.1",
+  "TagHelpers": [],
+  "Configuration": {
+    "ConfigurationName": "UnsupportedRazor",
+    "LanguageVersion": "1.0",
+    "Extensions": [
+      {
+        "ExtensionName": "UnsupportedRazorExtension"
+      }
+    ]
+  }
+}

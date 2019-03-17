@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<CommandModel namespace="Company.Template.Data">
+  <Commands>
+    <Command name="SaveItem" type="SqlServer"  connexion="DatabaseContext">
+      <Code>spm_xxxxx</Code>
+      <Parameters>
+        <Parameter name="parameter1" mapping="@parameter1" type="String"/>
+      </Parameters>
+    </Command>
+  </Commands>
+</CommandModel>

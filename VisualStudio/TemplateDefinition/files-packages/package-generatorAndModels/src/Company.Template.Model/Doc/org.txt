@@ -1,0 +1,28 @@
+﻿Application
+ UI Layer
+  Company.Template.Wpf
+   Views 
+    EntityMainPage (Wpf User control)
+    EntityListView (Wpf User control)		
+    EntityDetailDialog (Wpf Window)		
+   ViewModels
+    EntityMainViewModel
+    EntityDetailViewModel
+   ServiceAgents (Rest Proxyies)
+ Business Layer
+  Company.Template.Model
+   Business Services
+  Company.Template.Model.Entities
+   Entities
+   Dtos
+   Responses
+   Mapping Entity-Dto 
+ Data Layer
+  Company.Template.Data
+   Queries
+   Commands
+ Service Layer
+  Company.Template.Web
+   WebApis (Rest services)
+ 
+	

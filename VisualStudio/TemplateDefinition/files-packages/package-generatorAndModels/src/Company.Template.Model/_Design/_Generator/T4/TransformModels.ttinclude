@@ -1,0 +1,318 @@
+﻿<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.XPath" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Xml" #>
+<#@ include file="TemplateFilemanager4NetCore.CS.ttinclude" #><#@ include file="GenericModelGenerator.ttinclude"#><#@ include file="TransformationFile.ttinclude" #><#+
+
+	void TransformModels(string rootNamespace, string xslTemplates) 
+	{		
+		const string ERROR_MSG = "Error on Template = {0}\nMessage = {1}\n\n";
+		string step = "", xslFile = "", xmlFile = "", code = "";
+		int nbFiles = 0, nbErrors = 0;
+		string pathGenerator = Host.ResolveAssemblyReference("$(ProjectDir)") + @"\_Design\_Generator\Templates\";
+		string currentPath = Host.ResolvePath("");
+		List<string> errors = new List<string>();
+		EnvDTE.DTE dte;
+        var manager = TemplateFileManager.Create(this); 
+		try {
+			dte = manager.dte;
+			var msg = string.Format("*** Start {0} ***", DateTime.Now.ToString("hh:mm:ss"));
+			log(msg);
+			WriteLine(msg);
+			WriteLine("");
+			string path = Path.GetDirectoryName(Host.TemplateFile); 
+			string include = "";
+			string exclude = "";
+			xslTemplates = string.Format("{0}\\{1}", path, xslTemplates);
+			System.Xml.Xsl.XsltArgumentList arg;
+			TransformationFile templates = TransformationFile.Load(xslTemplates);		
+			CleanDirectories(dte, rootNamespace, templates);
+			foreach (var model in templates.Models.Where(item => item.IsEnabled.Equals(true))) {	
+				xmlFile = currentPath + "\\" + model.File;
+				msg = new string('=', xmlFile.Length + 8);
+				log(msg);
+				log(string.Format("Model : {0}",xmlFile));
+				log(msg);
+				log("	Transformations:");
+				if (File.Exists(xmlFile)) {
+					foreach (var template in model.XslTemplates.Where(item => item.IsEnabled.Equals(true))) {
+						step = template.Template;
+						include = "";
+						exclude = "";
+						xslFile = pathGenerator +  step;
+						template.TargetProject = string.Format(template.TargetProject, rootNamespace);
+						log(string.Format("	{0} -> Target = {1}", step, template.TargetProject));
+						//manager.CanOverwriteExistingFile = !template.CanOverwriteExistingFile;
+						//manager.CanOverrideExistingFile = !template.CanOverwriteExistingFile;
+						//WriteLine(template.File + " = " + template.CanOverwriteExistingFile);
+						if (!string.IsNullOrEmpty(template.Template)){
+							if (File.Exists(xslFile)) {
+								arg = new System.Xml.Xsl.XsltArgumentList(); 
+								arg.AddParam("excludeKey", "", template.ExcludeKey);
+								if (!string.IsNullOrEmpty(template.ExcludeEntities)) {
+									exclude = GetSetting(templates.Settings, template.ExcludeEntities);
+									arg.AddParam("excludeEntities", "", exclude);
+								}
+								if (!string.IsNullOrEmpty(template.IncludeEntities)) {
+									include = GetSetting(templates.Settings,template.IncludeEntities);
+									arg.AddParam("includeEntities", "", include);
+								}
+								if (string.IsNullOrEmpty(template.XPathQuery)) {
+									try {	
+										arg.AddParam("filename", "", template.Prefix + template.File);
+										code = ProcessFileXSL(model.File, xslFile, arg);
+										arg.RemoveParam("filename", "");
+										if (code.Length > 0) {
+											template.TargetProject = string.Format(template.TargetProject, rootNamespace);
+											MakeDirectory(dte, template.TargetProject,template.TargetDirectory);
+											log(string.Format("		{0}", template.Prefix + template.File));
+											manager.StartNewFile(template.Prefix + template.File,template.TargetProject,template.TargetDirectory);											
+											WriteLine(code); 
+											code = "";
+											nbFiles++;
+											manager.EndBlock();
+										}
+									}
+									catch (Exception ex) {
+										nbErrors++;
+										string tpl = template.Template;
+										errors.Add( string.Format(ERROR_MSG, tpl, ex.Message.ToString()));
+										throw new ApplicationException(string.Format(ERROR_MSG, tpl, ex.Message.ToString()));
+									}
+								}
+								else {
+									try  {
+										string xpathSelection = GetSetting(templates.Settings, template.XPathQuery); 
+										Dictionary<string, string> transformations = ProcessItemXSL(xpathSelection, template, model.File, xslFile, arg, include, exclude);
+										template.TargetProject = string.Format(template.TargetProject, rootNamespace);
+										MakeDirectory(dte, template.TargetProject,template.TargetDirectory);
+										foreach (var item in transformations) {
+											log(string.Format("		{0}", template.Prefix + item.Key));
+											manager.StartNewFile(template.Prefix + item.Key,template.TargetProject,template.TargetDirectory);
+											WriteLine(item.Value);
+											nbFiles++;
+											manager.EndBlock();
+										}		
+									}
+									catch (Exception ex) {
+										nbErrors++;
+										string tpl = template.Template;
+										errors.Add( string.Format(ERROR_MSG, tpl, ex.Message.ToString()));
+										manager.EndBlock();	
+										throw new ApplicationException(string.Format(ERROR_MSG, tpl, ex.Message.ToString()));
+									}
+								}
+							}
+							else {
+								throw new FileNotFoundException(string.Format("\n**************\nXSL file not found. File={0}\n**************\n", xslFile));								
+							}
+						} 
+					} // End each Templates
+				}
+				else {
+					WriteLine("================================================================================================");
+					WriteLine("Generic model not found:");
+					WriteLine("");
+					WriteLine(string.Format("File={0}", xmlFile));
+					WriteLine("");
+					WriteLine("The previous files has been deleted !");
+					WriteLine("");
+                }
+			} // End each models
+			manager.Process(true);
+			WriteLine("");
+			msg = string.Format("{0} Files generated.", nbFiles);
+			WriteLine(msg);
+			log(msg);
+			WriteLine("");
+			if (nbErrors > 0) {
+				WriteLine("");
+				msg = string.Format("{0} Error(s) occured.");
+				WriteLine(msg);
+				WriteLine("");
+                foreach (var item in errors) {
+					WriteLine(item);		 
+					log(msg);
+                }
+            }
+			msg = string.Format("*** End {0} ***", DateTime.Now.ToString("hh:mm:ss"));
+			WriteLine(msg);
+			log(msg);
+        }
+        catch (FileNotFoundException ex){
+			throw ex;				
+        }
+    }	
+
+	void CleanDirectories(EnvDTE.DTE dte, string rootNamespace, TransformationFile templates)
+    {
+		string dir = "";
+		string root = Path.GetDirectoryName(dte.Solution.FullName);
+		log("Clean directories");
+		foreach (var model in templates.Models) {	
+			foreach (var template in model.XslTemplates) {
+				if (!string.IsNullOrEmpty(template.TargetDirectory)) {
+					template.TargetProject = string.Format(template.TargetProject, rootNamespace);
+					dir = root + @"\" + template.TargetProject + @"\" + template.TargetDirectory;
+					if (Directory.Exists(dir)) {
+						if (dir.IndexOf("#") > 0) {
+							DeleteDirectory(dir);
+							log(string.Format("	{0} deleted.", dir));
+						}
+					}
+                }
+            }
+        }				
+    }
+   
+	void MakeDirectory(EnvDTE.DTE dte, string targetProject,string targetDirectory)
+    {
+		if (!string.IsNullOrEmpty(targetDirectory)) {
+			var dir = Path.GetDirectoryName(dte.Solution.FullName);
+			dir = dir + @"\" + targetProject + @"\" + targetDirectory;
+			if (!Directory.Exists(dir)) {
+				var di = Directory.CreateDirectory(dir);
+			}	
+        }
+    }
+
+	void DeleteDirectory(string target_dir)
+	{
+		try {	        
+			string[] files = Directory.GetFiles(target_dir);
+			string[] dirs = Directory.GetDirectories(target_dir);
+			foreach (string file in files){
+				File.SetAttributes(file, FileAttributes.Normal);
+				File.Delete(file);
+			}
+			foreach (string dir in dirs){
+				DeleteDirectory(dir);
+			}
+			Directory.Delete(target_dir, false);
+        }
+        catch {
+		
+        }
+	}
+
+	void log(string msg)
+    {
+		var outputWindow = (this.Host as IServiceProvider).GetService(typeof( SVsOutputWindow ) ) as IVsOutputWindow;
+		var paneGuid = Microsoft.VisualStudio.VSConstants.OutputWindowPaneGuid.GeneralPane_guid;
+		IVsOutputWindowPane pane;
+		outputWindow.CreatePane(paneGuid, "GenerateCodeFromModels", 1, 0);
+		outputWindow.GetPane(paneGuid, out pane);
+		pane.OutputString(msg + "\n");
+		pane.Activate();
+    }
+
+	string GetSetting(Settings settings, string settingValue)
+    {
+		if (settingValue.StartsWith("$")){
+			var setting = settings.Items.Where(item => item.Name.Equals(settingValue)).FirstOrDefault();
+			if (setting != null) {
+				return setting.Value;
+            }
+        }
+		return settingValue;
+    }
+
+	void ProduceGenericModel(string ModelName, GeneratorSettings settings){
+		string path = Path.GetDirectoryName(Host.TemplateFile);
+		FileInfo info = new FileInfo(Host.TemplateFile);
+		// ***************************************************
+		GenericModelGenerator generator = new GenericModelGenerator();
+		generator.Init(this, path, ModelName, settings);
+		Write(generator.Run());
+		// ***************************************************
+	}
+
+	void ProduceT4(ITextTemplatingEngineHost host, string template)	{
+		GenericModelGenerator generator = new GenericModelGenerator();
+		Write(generator.ProcessT4(host, template));
+	}
+
+	string ProcessFileXSL(string xml, string xsl, System.Xml.Xsl.XsltArgumentList arglist) {
+		string result ="";
+		var xsltFile		= this.Host.ResolvePath(xsl);
+		var xmlFile			= this.Host.ResolvePath(xml);
+		var xslt			= new System.Xml.Xsl.XslCompiledTransform(false);
+		var xsltSettings	= new System.Xml.Xsl.XsltSettings(true ,true);
+		xslt.Load(xsltFile, xsltSettings, (new System.Xml.XmlUrlResolver()));
+		using (StringWriter sw = new StringWriter()) {
+			xslt.Transform(xmlFile, arglist, sw);
+			result = sw.ToString();
+		}
+		return result;
+	}	
+
+	Dictionary<string, string> ProcessItemXSL(string xpathSelection, TemplateXSL template, string xml, string xsl, System.Xml.Xsl.XsltArgumentList arglist, string include, string exclude) 
+	{
+		string filePrefix = template.Prefix;
+		string extensionName = template.File;
+		Dictionary<string, string> result = new Dictionary<string, string>();
+		string resultItem = "";
+		string entityName = "";
+		System.Xml.Xsl.XsltArgumentList arg; 		
+		var xsltFile = this.Host.ResolvePath(xsl);
+		var xmlFile = this.Host.ResolvePath(xml);
+		if (!File.Exists(xsltFile)) {
+			throw new FileNotFoundException(xsltFile + " file not found !");
+        }
+		if (!File.Exists(xmlFile)) {
+			throw new FileNotFoundException(xmlFile + " file not found !");
+        }
+		string outputFileName = "";		
+		var xslt = new System.Xml.Xsl.XslCompiledTransform(false);
+		var xsltSettings = new System.Xml.Xsl.XsltSettings(true,true);
+		xslt.Load(xsltFile, xsltSettings, (new System.Xml.XmlUrlResolver()));
+		XmlDocument doc = new XmlDocument();
+		doc.Load(xmlFile);		
+		XmlNodeList nodeList;
+		XmlElement root = doc.DocumentElement;
+		nodeList = root.SelectNodes(xpathSelection);
+		if (arglist==null) {
+			arg = new System.Xml.Xsl.XsltArgumentList(); 
+        }
+		else {
+			arg = arglist;
+		}
+		foreach (XmlNode element in nodeList){
+			entityName = element.Attributes["name"].Value;
+			outputFileName = entityName + extensionName;
+			arg.AddParam("filename", "", filePrefix +outputFileName);				
+			if (CheckEntity(entityName, include, exclude)) {
+				try {
+					using (StringWriter sw = new StringWriter()) {
+						xslt.Transform(element.CreateNavigator(), arg, sw);
+						resultItem = sw.ToString();
+					}
+					result.Add(outputFileName, resultItem);
+				}
+				catch (Exception ex){
+					var id = Guid.NewGuid();
+					result.Add(id.ToString(), ex.Message.ToString());
+				}
+            }
+			arg.RemoveParam("filename", "");
+		}
+		return result;
+    }
+
+	bool CheckEntity(string entityName, string include, string exclude)	{
+		bool check=true;
+		if (include.Length>0)
+			if (include.IndexOf(entityName)==-1)
+				check=false;
+		if (exclude.Length>0)
+			if (exclude.IndexOf(entityName)>-1)
+				check=false;
+		return check;	
+	}
+ #>
+

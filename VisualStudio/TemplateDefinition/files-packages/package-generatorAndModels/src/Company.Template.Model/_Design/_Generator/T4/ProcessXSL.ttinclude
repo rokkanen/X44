@@ -1,0 +1,121 @@
+﻿<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.XPath" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Xml" #>
+<#@ include file="TemplateFilemanager4NetCore.CS.ttinclude" #><#+	
+	
+	void Transform(string xml, string xsl) {
+		FileInfo info = new FileInfo(Host.TemplateFile);
+		string code = "";
+		string targetFile = info.Name.Replace(".tt", ".cs");
+		System.Xml.Xsl.XsltArgumentList arg;    
+		
+		try {	
+			var manager = TemplateFileManager.Create(this); 
+			arg = new System.Xml.Xsl.XsltArgumentList(); 
+			arg.AddParam("filename", "", targetFile);
+			code = ProcessFileXSL(xml, xsl, arg);
+			if (code.Length > 0) {
+				manager.StartNewFile(targetFile,"","");
+				WriteLine(code); 
+				code = "";
+				manager.EndBlock();
+			}
+			manager.Process(true);
+		}
+		catch (Exception ex) {
+			string msg = "Erreur dans transformation";
+			throw new ApplicationException(msg);
+		}	
+    }	
+
+	void Transforms(string xpathQuery, string xml, string xsl, string filePrefix, string extensionName, System.Xml.Xsl.XsltArgumentList arglist) {
+		try {
+			var manager = TemplateFileManager.Create(this); 
+			Dictionary<string, string> transformations = ProcessItemXSL(xpathQuery, xml, xsl, filePrefix, extensionName, arglist);
+			
+			foreach (var item in transformations) {
+				manager.StartNewFile(filePrefix + item.Key,"","");
+				WriteLine(item.Value);
+				manager.EndBlock();
+			}		
+			manager.Process(true);
+		}
+		catch (Exception ex) {
+			string msg = "Erreur dans transformation";
+			throw new ApplicationException(msg);
+		}		
+	}
+
+	string ProcessFileXSL(string xml, string xsl, System.Xml.Xsl.XsltArgumentList arglist) {
+		string result ="";
+		var xsltFile		= this.Host.ResolvePath(xsl);
+		var xmlFile			= this.Host.ResolvePath(xml);
+		var xslt			= new System.Xml.Xsl.XslCompiledTransform(false);
+		var xsltSettings	= new System.Xml.Xsl.XsltSettings(true ,true);
+		
+		xslt.Load(xsltFile, xsltSettings, (new System.Xml.XmlUrlResolver()));
+		using (StringWriter sw = new StringWriter()) {
+			xslt.Transform(xmlFile, arglist, sw);
+			result = sw.ToString();
+		}
+		return result;		
+	}	
+	
+	Dictionary<string, string> ProcessItemXSL(string xpathSelection, string xml, string xsl, string filePrefix, string extensionName, System.Xml.Xsl.XsltArgumentList arglist) {
+		Dictionary<string, string> result = new Dictionary<string, string>();
+		string resultItem = "";
+		string entityName = "";
+		System.Xml.Xsl.XsltArgumentList arg; 
+		var xsltFile = this.Host.ResolvePath(xsl);
+		var xmlFile = this.Host.ResolvePath(xml);
+		
+		if (!File.Exists(xsltFile)) {
+			throw new FileNotFoundException(xsltFile + " file not found !");
+        }
+		if (!File.Exists(xmlFile)) {
+			throw new FileNotFoundException(xmlFile + " file not found !");
+        }
+		string outputFileName = "";
+		var xslt = new System.Xml.Xsl.XslCompiledTransform(false);
+		var xsltSettings = new System.Xml.Xsl.XsltSettings(true,true);
+		xslt.Load(xsltFile, xsltSettings, (new System.Xml.XmlUrlResolver()));
+		XmlDocument doc = new XmlDocument();
+		doc.Load(xmlFile);
+		XmlNodeList nodeList;
+		XmlElement root = doc.DocumentElement;
+		nodeList = root.SelectNodes(xpathSelection);
+		if (arglist==null) {
+			arg = new System.Xml.Xsl.XsltArgumentList(); 
+        }
+		else {
+			arg = arglist;
+		}
+		foreach (XmlNode element in nodeList){
+			entityName = element.Attributes["name"].Value;
+			outputFileName = entityName + extensionName;
+			arg.AddParam("filename", "", filePrefix +outputFileName);
+			try {
+				using (StringWriter sw = new StringWriter()) {
+					xslt.Transform(element.CreateNavigator(), arg, sw);
+					resultItem = sw.ToString();
+				}
+
+				result.Add(outputFileName, resultItem);
+			}
+			catch (Exception ex){
+				var id = Guid.NewGuid();
+				result.Add(id.ToString(), ex.Message.ToString());
+			}
+
+			arg.RemoveParam("filename", "");
+		}
+		return result;
+    }
+ #>
+

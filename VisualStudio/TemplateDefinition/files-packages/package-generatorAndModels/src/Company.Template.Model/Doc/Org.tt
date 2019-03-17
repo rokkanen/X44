@@ -1,0 +1,69 @@
+﻿<#/* org.tree
+Org Chart generator using DGML, by David Ebbo (@davidebbo)
+
+To use this template, add it to a VS project, and create a .tree file with the same name (e.g. OrgChart.tree).
+That file uses a simple DSL to define the org hierarchy, e.g.
+
+Joe
+    Jill
+        Bill
+        Bert
+        David
+    John
+        Bob
+
+When you run the tt template (by saving it or choosing 'Run Custom Tool'), it generates an OrgChart.dgml file that
+you can them open in VS to view as a graphical org chart.
+
+*/#>
+<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ output extension=".dgml" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Links>
+<# RenderLinks(); #>
+  </Links>
+</DirectedGraph>
+
+<#+ 
+int Index;
+UserEntry[] Users;
+
+void RenderLinks() {
+    string inputFile = Path.ChangeExtension(Host.TemplateFile, ".txt");
+    Users = File.ReadAllLines(inputFile).Select(line => new UserEntry(line)).ToArray();
+
+    ProcessChildren();
+}
+
+void ProcessChildren(UserEntry parentUser = null) {
+    for (; ; ) {
+        if (Index >= Users.Length) break;
+
+        var currentEntry = Users[Index];
+        if (parentUser != null && currentEntry.Indent <= parentUser.Indent) break;
+        Index++;
+
+        if (parentUser != null) {
+#>
+    <Link Source="<#= parentUser.Name #>" Target="<#= currentEntry.Name #>" />
+<#+
+        }
+
+        ProcessChildren(currentEntry);
+    }
+}
+
+class UserEntry {
+    public UserEntry(string line) {
+        for (; Indent < line.Length && line[Indent] == ' '; Indent++) { }
+        Name = line.Trim();
+    }
+
+    public int Indent { get; set; }
+    public string Name { get; set; }
+}
+#>

@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<QueryModel namespace="Company.Template.Data">
+  <Queries>
+    <Query name="FindAllTables" resultType="string" type="SqlServer" connexion="DatabaseContext">
+      <Code>select Name as TableId,Name  from sys.tables order by name</Code>
+    </Query>
+  </Queries>
+</QueryModel>

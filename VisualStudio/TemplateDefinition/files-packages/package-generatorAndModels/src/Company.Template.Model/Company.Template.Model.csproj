@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{305646B6-E778-4EC4-AAAF-16B435C07F55}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Company.Template.Model</RootNamespace>
+    <AssemblyName>Company.Template.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="_Design\AppModels\ApiModel.xml" />
+    <Content Include="_Design\AppModels\DataCommandModel.xml" />
+    <Content Include="_Design\AppModels\DataQueryModel.xml" />
+    <Content Include="_Design\CodeGenerationWorkflow.xml" />
+    <Content Include="_Design\EntityModels\Main\Model.generic.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model.generic.xml</LastGenOutput>
+    </Content>
+    <Content Include="_Design\EntityModels\Main\Model.generic.xml">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.generic.tt</DependentUpon>
+    </Content>
+    <Content Include="_Design\GenerateCodeFromModels.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GenerateCodeFromModels.log</LastGenOutput>
+    </Content>
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\Api\ApiClientProxy.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\Api\Samples\ApiClientProxy.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\Api\Samples\WebApiController.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\Api\Samples\WebApiStrongLoopStyle.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\Api\WebApiController.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\Api\WebApiStrongLoopStyle.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\Business.Entities\Dto.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\Business.Entities\Entities.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\Business.Entities\EntitiesRelation.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\Business.Entities\Samples\Entities.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\Business.Entities\Samples\EntitiesRelation.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\Data\DbContext.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\Data\Mapping.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\Data\MappingMany2Many.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\Data\Query.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\Data\Samples\DbContext.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\Data\Samples\Mapping.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\Data\Samples\QueryEF.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\Data\Samples\_Commands.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\Data\Samples\_Queries.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\dbTypes.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\globalParameters.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\Header.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\mixins.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNetCore\v1\variables.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Api\ApiClientProxy.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Api\Samples\ApiClientProxy.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Api\Samples\WebApiController.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Api\Samples\WebApiStrongLoopStyle.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Api\WebApiController.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Api\WebApiStrongLoopStyle.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Business.Entities\Automapper.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Business.Entities\Collections.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Business.Entities\Dto.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Business.Entities\DtoTrackable.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Business.Entities\Entities.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Business.Entities\EntityExtensions.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Business.Entities\Response.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Business.Entities\ResponseAsync.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Business.Entities\Samples\Automapper.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Business.Entities\Samples\Collections.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Business.Entities\Samples\Dto.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Business.Entities\Samples\Entities.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Business.Entities\Samples\Entity.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Business.Entities\Samples\EntityExtensions.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Business.Entities\TrackableEntities.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Business\Samples\IService.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Business\Samples\ServiceAsyncQuery.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Business\Samples\ServiceQuery.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Business\Service.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Business\ServiceIow.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Client.Entities\Dto.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Client.Entities\Entities.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Client.Entities\Samples\Dto.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Client.Entities\Samples\Entities.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Client.Services\Samples\ServiceAgent.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Client.Services\ServiceAgent.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Data\Command.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Data\CommandAsync.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Data\CommandEF.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Data\DataUtility.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Data\DbContext.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Data\IDbContext.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Data\Mapping.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Data\Query.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Data\QueryAsyncOld.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Data\QueryEF.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Data\Repository.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Data\Samples\CommandEF.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Data\Samples\DataUtility.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Data\Samples\DbContext.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Data\Samples\IDbContext.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Data\Samples\Mapping.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Data\Samples\QueryEF.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Data\Samples\Repository.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Data\Samples\UnitOfWork.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Data\Samples\_Commands.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Data\Samples\_Queries.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Data\UnitOfWork.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\dbTypes.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\globalParameters.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Header.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Interfaces\IDbContext.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Interfaces\IQueries.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Interfaces\IRepository.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Interfaces\IService.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Interfaces\IServiceAgent.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Interfaces\IServiceAsync.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Interfaces\IUnitOfWork.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Interfaces\Samples\IDbContext.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Interfaces\Samples\IRepository.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Interfaces\Samples\IService.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Interfaces\Samples\IServiceAgent.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Interfaces\Samples\IServiceAsync.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Interfaces\Samples\IUnitOfWork.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Interfaces\Samples\Query.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\mixins.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Tests\Makesample.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Tests\Samples\Makesample.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Tests\Samples\ServiceTest.xml" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\Tests\ServiceTest.xsl" />
+    <Content Include="_Design\_Generator\Templates\DotNet\v1\variables.xsl" />
+    <Content Include="Doc\org.txt" />
+    <None Include="App.Config" />
+    <None Include="Doc\Architecture3T-SmartClient.dgml" />
+    <None Include="Doc\Architecture3T-Web.dgml" />
+    <None Include="Doc\Architecture2T.dgml" />
+    <None Include="Doc\Org.dgml">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Org.tt</DependentUpon>
+    </None>
+    <None Include="Doc\UIModel.dgml" />
+    <None Include="packages.config" />
+    <EntityDeploy Include="_Design\EntityModels\Main\Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="_Design\_Generator\T4\GenericModelGenerator.ttinclude" />
+    <None Include="_Design\_Generator\T4\ProcessXSL.ttinclude" />
+    <None Include="_Design\_Generator\T4\TemplateFilemanager4NetCore.CS.ttinclude" />
+    <None Include="_Design\_Generator\T4\TransformationFile.ttinclude" />
+    <None Include="_Design\_Generator\T4\TransformModels.ttinclude" />
+    <None Include="_Design\_variables.ttinclude" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="_Design\_Generator\Templates\DotNet\v1\Web\Samples\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Doc\Org.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Org.dgml</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

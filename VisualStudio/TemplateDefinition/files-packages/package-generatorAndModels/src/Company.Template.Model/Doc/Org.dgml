@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph Layout="Sugiyama" ZoomLevel="-1" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="Application" Bounds="0,224,78.9666666666667,25.66" Label="Application" />
+    <Node Id="Business Layer" Bounds="108.966666666666,280,94.7799999999997,25.66" Label="Business Layer" />
+    <Node Id="Business Services" Bounds="491.483333333333,392,108.886666666667,25.66" Label="Business Services" />
+    <Node Id="Commands" Bounds="506.4,56,79.0533333333333,25.66" Label="Commands" />
+    <Node Id="Company.Template.Data" Bounds="258.343333333333,112,147.306666666666,25.66" Label="Company.Template.Data" />
+    <Node Id="Company.Template.Model" Bounds="253.75,336,156.493333333333,25.66" Label="Company.Template.Model" />
+    <Node Id="Company.Template.Model.Entities" Bounds="233.746666666667,280,196.5,25.66" Label="Company.Template.Model.Entities" />
+    <Node Id="Company.Template.Web" Bounds="258.42,56,147.153333333334,25.66" Label="Company.Template.Web" />
+    <Node Id="Company.Template.Wpf" Bounds="259.656666666667,448,144.68,25.66" Label="Company.Template.Wpf" />
+    <Node Id="Data Layer" Bounds="118.89,224,74.9333333333334,25.66" Label="Data Layer" />
+    <Node Id="Dtos" Bounds="520.926666666667,280,50,25.66" Label="Dtos" />
+    <Node Id="Entities" Bounds="517.2,336,57.4533333333334,25.66" Label="Entities" />
+    <Node Id="EntityDetailDialog (Wpf Window)" Bounds="665.82,560,191.03,25.6599999999999" Label="EntityDetailDialog (Wpf Window)" />
+    <Node Id="EntityDetailViewModel" Bounds="692.595,448,137.48,25.66" Label="EntityDetailViewModel" />
+    <Node Id="EntityListView (Wpf User control)" Bounds="666.378333333333,616,189.913333333333,25.6599999999999" Label="EntityListView (Wpf User control)" />
+    <Node Id="EntityMainPage (Wpf User control)" Bounds="661.606666666667,672,199.456666666667,25.6599999999999" Label="EntityMainPage (Wpf User control)" />
+    <Node Id="EntityMainViewModel" Bounds="694.603333333333,504,133.463333333333,25.6599999999999" Label="EntityMainViewModel" />
+    <Node Id="Mapping Entity-Dto" Bounds="484.388333333333,168,123.076666666667,25.66" Label="Mapping Entity-Dto" />
+    <Node Id="Queries" Bounds="516.03,112,59.7933333333331,25.66" Label="Queries" />
+    <Node Id="Responses" Bounds="508.511666666667,224,74.8299999999999,25.66" Label="Responses" />
+    <Node Id="Service Layer" Bounds="112.708333333333,168,87.2966666666666,25.66" Label="Service Layer" />
+    <Node Id="ServiceAgents (Rest Proxyies)" Bounds="460.246666666666,448,171.36,25.66" Label="ServiceAgents (Rest Proxyies)" />
+    <Node Id="UI Layer" Bounds="125.391666666666,336,61.9300000000003,25.66" Label="UI Layer" />
+    <Node Id="ViewModels" Bounds="504.308333333333,504,83.2366666666667,25.6599999999999" Label="ViewModels" />
+    <Node Id="Views" Bounds="520.926666666667,560,50,25.6599999999999" Label="Views" />
+    <Node Id="WebApis (Rest services)" Bounds="474.671666666666,0,142.51,25.66" Label="WebApis (Rest services)" />
+  </Nodes>
+  <Links>
+    <Link Source="Application" Target="Business Layer" Bounds="66.2598495483398,249.660003662109,55.2039108276367,26.4510192871094" />
+    <Link Source="Application" Target="Data Layer" Bounds="78.966667175293,236.830001831055,30.9233322143555,0" />
+    <Link Source="Application" Target="Service Layer" Bounds="66.2598495483398,197.548980712891,55.2039108276367,26.4510192871094" />
+    <Link Source="Application" Target="UI Layer" Bounds="51.5124206542969,249.660003662109,82.0469512939453,80.6686096191406" />
+    <Link Source="Business Layer" Target="Company.Template.Model" Bounds="196.597045898438,305.660003662109,86.5845336914063,27.6060791015625" />
+    <Link Source="Business Layer" Target="Company.Template.Model.Entities" Bounds="203.746673583984,292.829986572266,21,0" />
+    <Link Source="Company.Template.Data" Target="Commands" Bounds="381.009552001953,81.444694519043,116.726715087891,30.555305480957" />
+    <Link Source="Company.Template.Data" Target="Queries" Bounds="405.649993896484,124.830001831055,101.380004882813,0" />
+    <Link Source="Company.Template.Model" Target="Business Services" Bounds="381.009552001953,361.660003662109,107.197570800781,28.0608825683594" />
+    <Link Source="Company.Template.Model.Entities" Target="Dtos" Bounds="430.246673583984,292.829986572266,81.6799926757813,0" />
+    <Link Source="Company.Template.Model.Entities" Target="Entities" Bounds="381.009552001953,305.660003662109,127.483795166016,33.3711547851563" />
+    <Link Source="Company.Template.Model.Entities" Target="Mapping Entity-Dto" Bounds="356.503112792969,197.834350585938,156.943725585938,82.1656494140625" />
+    <Link Source="Company.Template.Model.Entities" Target="Responses" Bounds="381.009552001953,248.903167724609,118.795471191406,31.0968322753906" />
+    <Link Source="Company.Template.Web" Target="WebApis (Rest services)" Bounds="381.009552001953,27.9391193389893,107.197570800781,28.0608806610107" />
+    <Link Source="Company.Template.Wpf" Target="ServiceAgents (Rest Proxyies)" Bounds="404.336669921875,460.829986572266,46.9100036621094,0" />
+    <Link Source="Company.Template.Wpf" Target="ViewModels" Bounds="381.009552001953,473.660003662109,114.770050048828,30.0431213378906" />
+    <Link Source="Company.Template.Wpf" Target="Views" Bounds="356.503112792969,473.660003662109,157.839538574219,82.6346740722656" />
+    <Link Source="Data Layer" Target="Company.Template.Data" Bounds="176.476852416992,142.498916625977,127.811172485352,81.5010833740234" />
+    <Link Source="Service Layer" Target="Company.Template.Web" Bounds="173.703567504883,85.7178421020508,124.860275268555,82.2821578979492" />
+    <Link Source="UI Layer" Target="Company.Template.Wpf" Bounds="176.476852416992,361.660003662109,127.811172485352,81.5010681152344" />
+    <Link Source="ViewModels" Target="EntityDetailViewModel" Bounds="587.390808105469,475.924468994141,115.882141113281,30.1260375976563" />
+    <Link Source="ViewModels" Target="EntityMainViewModel" Bounds="587.544982910156,516.830017089844,98.058349609375,0" />
+    <Link Source="Views" Target="EntityDetailDialog (Wpf Window)" Bounds="570.926696777344,572.830017089844,85.893310546875,0" />
+    <Link Source="Views" Target="EntityListView (Wpf User control)" Bounds="570.926696777344,579.329284667969,132.346252441406,34.40625" />
+    <Link Source="Views" Target="EntityMainPage (Wpf User control)" Bounds="565.764831542969,585.659973144531,152.375732421875,83.2229614257813" />
+  </Links>
+  <Properties>
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="Label" Label="Étiquette" Description="Étiquette affichable d'un objet pouvant être annoté" DataType="System.String" />
+    <Property Id="Layout" DataType="System.String" />
+    <Property Id="ZoomLevel" DataType="System.String" />
+  </Properties>
+</DirectedGraph>

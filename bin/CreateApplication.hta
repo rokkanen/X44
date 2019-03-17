@@ -1,0 +1,132 @@
+<HTA:APPLICATION ID="oMe" APPLICATIONNAME="X44 Create App"  SINGLEINSTANCE="yes"  SCROLL="no">
+<html>
+	<head>
+	<title>X44 Create Application</title>
+	<style>
+		body {
+		  	background-color:#f1f1f1;
+	  		font-family:"Trebuchet MS",Verdana,Geneva,Arial,Helvetica,sans-serif;
+	  		font-weight: normal;font-size: 12pt; 
+	  		margin:0.5em;
+		}		
+		input { width:500px;}
+	</style>
+	<script language="vbscript">
+	<!--
+		Option Explicit
+		'===================================
+		const directoryApps ="C:\ApplisDotnet"
+		const templateDir="C:\DotNetTemplate\X44\VisualStudio\SolutionTemplate"
+		'===================================
+		Public appFso        'FileSystemObject
+		Public appShell      'command shell object
+		Public appFullPath   'install path
+		Public appWsh
+
+		Private Sub window_onload()
+			window.resizeTo screen.availWidth/2,screen.availHeight/1.4
+			window.moveTo screen.availWidth/4,screen.availHeight/4
+			set appWsh = CreateObject("WScript.Shell")
+		    Set appFso = CreateObject("Scripting.FileSystemObject")
+	    	appFullPath = appFso.GetParentFolderName(oMe.commandLine)
+	    	 'work around bug in FileSystemObject
+	    	If Left(appFullPath, 1) = """" Then appFullPath = Mid(appFullPath, 2)
+			document.frmPage.txtTarget.value = directoryApps
+			LoadTemplates
+		End Sub
+	
+		Private Function verifChamp(field,TxtInfo)
+			verifChamp=true
+			if field="" then
+				verifChamp=false
+				msgbox TxtInfo
+			end if
+		End function
+
+		Sub cmdCreateApp_OnClick
+			dim tpl, target,prj, directory, sourceDir, command
+			tpl=document.frmPage.listTemplate.value
+			target=document.frmPage.txtTarget.value
+			prj=document.frmPage.txtProject.value
+			if verifChamp(tpl,"Select a template please.")=false then exit sub
+			if verifChamp(prj,"Enter a project name.")=false then exit sub
+			if verifChamp(target,"Enter a target directory.")=false then exit sub
+			directory = document.frmPage.txtTarget.value
+			appWsh.CurrentDirectory = directory
+			If (InStr(tpl, ".Core")> 0) Then
+				sourceDir = templateDir + "\" + tpl
+				command = "powershell.exe dotnet-create " + prj + " " + tpl 
+				appWsh.run command, 1, True
+				command = sourceDir + "\createnetcore.cmd " + prj + " " + sourceDir 
+				appWsh.run command, 1, True
+			Else
+				command = "powershell.exe -executionpolicy unrestricted dotnet-create " + prj + " " + tpl 
+				appWsh.run command
+			End If
+		End Sub
+		
+		Sub txtProject_OnChange
+			document.frmPage.txtDatabase.value = document.frmPage.txtProject.value + ".DB"
+		End Sub
+		
+		Sub cmdCreateDatabase_OnClick
+			dim db
+			db = document.frmPage.txtDatabase.value
+			if verifChamp(db,"Enter a database name.")=false then exit sub
+			appWsh.CurrentDirectory = appFullPath + "/db"
+			appWsh.run "createDatabase.cmd " + db
+		End Sub
+
+		Sub cmdDropDatabase_OnClick
+			dim db
+			db = document.frmPage.txtDatabase.value
+			if verifChamp(db,"Enter a database name.")=false then exit sub
+			appWsh.CurrentDirectory = appFullPath + "/db"
+			appWsh.run "dropDatabase.cmd " + db
+		End Sub
+		
+		Sub cmdCreateTemplate_OnClick
+			appWsh.run appFullPath + "/CreateTemplate.hta"
+		End Sub
+		
+		Sub LoadTemplates()
+			dim folderspec,ext,sHtm,mFile
+		    Dim fso, f, f1, fc, s,i,j
+			folderspec=templateDir
+			ext =""
+			Set fso = CreateObject("Scripting.FileSystemObject")
+			Set f = fso.GetFolder(folderspec)
+			Set fc = f.SubFolders
+			If fc.Count = 0 Then
+				MsgBox "SolutionTemplate folder is empty, create a template first with CreateTemplate.hta"
+			End If
+			sHtm = "<select name=""listTemplate"" size=""10"">"
+			For Each f1 in fc
+				If InStr(LCase(f1.name),ext)>0 Then
+					sHtm=sHtm+"<option value='" + f1.name + "'>" + f1.name + "</option>"
+					j=j+1
+				End If
+				i=i+1
+			Next
+			sHtm = sHtm + "</select>"
+			list.innerHTML=sHtm
+		End Sub
+	-->	
+	</script>
+	</head>
+<body>
+<form name="frmPage">
+	Template:<br/>
+	<div id="list">
+	</div>
+	<input name="cmdCreateTemplate" type="button" value="Create Template"><br/>
+	<hr/>
+	<div>Project:</div><input name="txtProject" type="text"><br/>
+	<div>Database:</div><input name="txtDatabase" type="text"><br/>
+	<div>Target directory:</div><input name="txtTarget" type="text"><br/><br/>
+	<input name="cmdCreateApp" type="button" value="Create Application"><br/>
+	<input name="cmdCreateDatabase" type="button" value="Create Database"><br/>
+	<input name="cmdDropDatabase" type="button" value="Drop Database"><br/>
+</form>
+</body>
+</html>

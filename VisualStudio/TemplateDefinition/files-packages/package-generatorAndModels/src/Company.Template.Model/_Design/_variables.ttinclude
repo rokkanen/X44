@@ -1,0 +1,4 @@
+﻿<#+	
+	string rootNameSpace ="Company.Template";
+	string transformationsFile = "CodeGenerationWorkflow.xml";
+#>

@@ -1,0 +1,5 @@
+﻿<#@ template hostspecific="true"#><#@ output extension="log" #>
+<#@ include file="_variables.ttinclude"#><#@ include file="_Generator/T4/TransformModels.ttinclude"#><#
+	//Model.edmx <-- DO NOT REMOVE THIS LINE (AFTER SAVING .EDMX THIS TEMPLATE IS CALLED)
+	TransformModels(rootNameSpace, transformationsFile);	
+ #>

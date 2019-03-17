@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="263bbdcc-5a7d-4287-8d0d-f52cdb4f7427" Bounds="-1153.58944986979,-1345.75955261265,386.468734130858,89.0356272460904" Group="Expanded" Label="Backend" LayoutSettings="RightToLeft" UseManualLocation="True" />
+    <Node Id="ADO.NET" Bounds="-1107.30127115885,-1457.67985261266,93.75,41.32" Label="ADO.NET&#xD;&#xA;(Dapper et EF)" />
+    <Node Id="BUS(RabbitMQ)" Bounds="-980.785598958333,-1458.47782624547,80.27,41.32" Label="BUS &#xD;&#xA;(RabbitMQ)" UseManualLocation="True" />
+    <Node Id="BusinessLayer" Category="BIZ" Bounds="-1116.19249172635,-1671.37489126527,318.776669514977,86.6984690429699" Group="Expanded" Label="Business Layer / Application Layer" UseManualLocation="True" />
+    <Node Id="ClientTiers(Front-End)" Bounds="-1110.46234049479,-2170.3286640899,281.543333333333,257.28066611328" Group="Expanded" Label="Client Tiers (Front-End)" LayoutSettings="TopToBottom" UseManualLocation="True" />
+    <Node Id="Commands" Bounds="-935.363035888671,-1514.43795075719,79.0533333333333,25.66" Label="Commands" UseManualLocation="True" />
+    <Node Id="Database" Bounds="-1133.58944986979,-1302.38402536656,68.29,25.66" />
+    <Node Id="Dto" Bounds="-867.415822211373,-1631.41228884312,50,25.66" UseManualLocation="True" />
+    <Node Id="Entities" Bounds="-955.59248887804,-1630.39825075719,57.4533333333333,25.66" UseManualLocation="True" />
+    <Node Id="IService" Bounds="-1011.73011922201,-1958.70809797662,87.9266666666667,25.6599999999999" Label="ServiceAgent" UseManualLocation="True" />
+    <Node Id="IService1" Bounds="-1013.53885253906,-1883.04789797662,91.0599999999999,25.6599999999999" Label="IServiceAgent" UseManualLocation="True" />
+    <Node Id="InfrastructureLayer" Category="DATA" Bounds="-1127.30127115885,-1554.3763222223,330.934030354814,158.07829814453" Group="Expanded" Label="Data Layer" UseManualLocation="True" />
+    <Node Id="ORM" Bounds="-866.367240804036,-1458.47788728062,50,41.32" Label="ORM &#xD;&#xA;(EF)" UseManualLocation="True" />
+    <Node Id="OtherPlatforms..." Bounds="-897.350715738932,-1304.08708933141,110.23,25.66" Label="Other platforms..." UseManualLocation="True" />
+    <Node Id="Queries" Bounds="-1090.30931559245,-1513.64040437047,59.7933333333333,25.66" Label="Queries" UseManualLocation="True" />
+    <Node Id="Service" Bounds="-1096.19249172635,-1631.43651980016,108.886666666667,25.66" Label="Business Services" UseManualLocation="True" />
+    <Node Id="ServiceLayer" Bounds="-1147.30127115885,-1827.03529126527,370.934030354814,450.737367187499" Group="Expanded" Label="Backend (Service Layer)" UseManualLocation="True" />
+    <Node Id="ServiceLayer1" Bounds="-1008.42852335613,-1787.03519126527,107.296666666667,85.6601999999998" Group="Expanded" Label="Service Layer" UseManualLocation="True" />
+    <Node Id="ServicesBrokers" Bounds="-1034.36599934896,-1305.75945261265,103.656666666667,25.66" Label="Services Brokers" />
+    <Node Id="UI" Bounds="-994.690673828123,-2090.3284640899,50,25.6599999999999" Label="UI" />
+    <Node Id="UILayer" Category="UI" Bounds="-1090.46234049479,-2130.3285640899,241.543333333333,141.3203" Group="Expanded" Label="UI Layer (XAML Family (Xamarin, WPF))" />
+    <Node Id="VM" Bounds="-994.690673828125,-2034.6683640899,50,25.6599999999999" Label="VM" />
+    <Node Id="WebApi" Bounds="-985.498523356127,-1747.03509126527,61.4366666666665,25.6599999999999" Label="WebApi" />
+  </Nodes>
+  <Links>
+    <Link Source="263bbdcc-5a7d-4287-8d0d-f52cdb4f7427" Target="Database" Category="Contains" />
+    <Link Source="263bbdcc-5a7d-4287-8d0d-f52cdb4f7427" Target="OtherPlatforms..." Category="Contains" />
+    <Link Source="263bbdcc-5a7d-4287-8d0d-f52cdb4f7427" Target="ServicesBrokers" Category="Contains" />
+    <Link Source="BusinessLayer" Target="Dto" Category="Contains" />
+    <Link Source="BusinessLayer" Target="Entities" Category="Contains" />
+    <Link Source="BusinessLayer" Target="Service" Category="Contains" />
+    <Link Source="ClientTiers(Front-End)" Target="IService" Category="Contains" />
+    <Link Source="ClientTiers(Front-End)" Target="UILayer" Category="Contains" />
+    <Link Source="Commands" Target="BUS(RabbitMQ)" Bounds="-920.962769822554,-1488.7162222223,16.1129902659849,22.935787614131" />
+    <Link Source="Commands" Target="ORM" Bounds="-884.8810749408,-1488.7162222223,20.028408520669,23.4557351655121" />
+    <Link Source="IService" Target="IService1" Bounds="-967.262550669433,-1933.35731980016,0.114563710013044,41.0771539472446" />
+    <Link Source="InfrastructureLayer" Target="263bbdcc-5a7d-4287-8d0d-f52cdb4f7427" Bounds="-961.162924424018,-1396.35288563035,0.353282332747426,41.5936576402091" />
+    <Link Source="InfrastructureLayer" Target="ADO.NET" Category="Contains" />
+    <Link Source="InfrastructureLayer" Target="BUS(RabbitMQ)" Category="Contains" />
+    <Link Source="InfrastructureLayer" Target="Commands" Category="Contains" />
+    <Link Source="InfrastructureLayer" Target="ORM" Category="Contains" />
+    <Link Source="InfrastructureLayer" Target="Queries" Category="Contains" />
+    <Link Source="Queries" Target="ADO.NET" Bounds="-1060.41993737714,-1487.91867583558,0.00454865297911056,21.300551963019" />
+    <Link Source="Service" Target="Commands" Bounds="-990.691699271935,-1557.20188352636,77.5111283474964,165.209079429296" />
+    <Link Source="Service" Target="Queries" Bounds="-1060.38778514095,-1557.20188352636,58.9850313063237,165.675770910185" />
+    <Link Source="ServiceLayer" Target="BusinessLayer" Category="Contains" />
+    <Link Source="ServiceLayer" Target="InfrastructureLayer" Category="Contains" />
+    <Link Source="ServiceLayer" Target="ServiceLayer1" Category="Contains" />
+    <Link Source="ServiceLayer1" Target="WebApi" Category="Contains" Bounds="-670.435180664063,-1348.55310058594,2.0015869140625,76.6668701171875" />
+    <Link Source="UI" Target="VM" Bounds="-969.690673828124,-2064.6684640899,5.6843418860808E-13,21.0001" />
+    <Link Source="UILayer" Target="UI" Category="Contains" />
+    <Link Source="UILayer" Target="VM" Category="Contains" />
+    <Link Source="VM" Target="IService" Bounds="-976.37309938445,-1777.40693847656,1.04262810123782,41.0031255027488" />
+    <Link Source="WebApi" Target="IService1" Bounds="-965.736865385643,-1848.34361791046,7.30183478712991,101.023717054695" />
+    <Link Source="WebApi" Target="Service" Bounds="-991.812693812539,-1729.19406087011,31.3510802480376,137.258142495386" />
+  </Links>
+  <Categories>
+    <Category Id="BIZ" Label="Business" Background="#FF0000FF" />
+    <Category Id="Contains" Label="Contient" Description="Si la source de la liaison contient ou non l'objet cible" CanBeDataDriven="False" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Contenu par" IsContainment="True" OutgoingActionLabel="Contient" />
+    <Category Id="DATA" Label="Data" Background="#FF008000" />
+    <Category Id="UI" Label="UI" Background="#FFFFFF00" />
+  </Categories>
+  <Properties>
+    <Property Id="Background" Label="Background" Description="The background color" DataType="System.Windows.Media.Brush" />
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CanLinkedNodesBeDataDriven" Label="CanLinkedNodesBeDataDriven" Description="CanLinkedNodesBeDataDriven" DataType="System.Boolean" />
+    <Property Id="Group" Label="Groupe" Description="Affiche le nœud en tant que groupe" DataType="Microsoft.VisualStudio.GraphModel.GraphGroupStyle" />
+    <Property Id="IncomingActionLabel" Label="IncomingActionLabel" Description="IncomingActionLabel" DataType="System.String" />
+    <Property Id="IsContainment" DataType="System.Boolean" />
+    <Property Id="Label" Label="Étiquette" Description="Étiquette affichable d'un objet pouvant être annoté" DataType="System.String" />
+    <Property Id="LayoutSettings" DataType="Microsoft.VisualStudio.Diagrams.View.GroupLayoutStyle" />
+    <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
+    <Property Id="UseManualLocation" DataType="System.Boolean" />
+  </Properties>
+</DirectedGraph>

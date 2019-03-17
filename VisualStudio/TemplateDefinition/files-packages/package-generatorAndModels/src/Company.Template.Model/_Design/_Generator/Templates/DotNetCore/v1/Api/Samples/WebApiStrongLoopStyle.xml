@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../WebApiStrongLoopStyle.xsl"?>
+<ApiModel namespace="Nova.Api">
+  <Resources>
+    <Resource id="Category" name="Categories" routePrefix="v1">
+      <Operations>
+        <Operation id="Category_list" name="FindAllAsync" httpMethod="HttpGet" version="" tags="" route="Categories">
+          <Summary>Find all instances of the model matched by filter from the data source</Summary>
+          <Parameters>
+           </Parameters>
+        </Operation>
+        <Operation id="Category_findById" name="FindByIdAsync" httpMethod="HttpGet" version="" tags="" route="Categories/{id}">
+          <Summary>Find a model instance by id from the data source</Summary>
+          <Parameters>
+            <Parameter name="id" type="Guid"/>
+          </Parameters>
+        </Operation>
+        <Operation id="Category_create" name="CreateAsync" httpMethod="HttpPost" version="" tags="" route="Categories">
+          <Summary>Create a new instance of the model and persist it into the data source</Summary>
+          <Parameters>
+            <Parameter id="category" type="CategoryInfo"/>
+          </Parameters>
+        </Operation>
+        <Operation id="Category_update" name="UpdateAsync" httpMethod="HttpPut" version="" tags="" route="Categories/{id}">
+          <Summary>Update attributes for a model instance and persist it into the data source.</Summary>
+          <Parameters>
+            <Parameter id="category" type="CategoryInfo"/>
+          </Parameters>
+        </Operation>
+        <Operation id="Category_delete" name="DeleteAsync" httpMethod="HttpDelete" version="" tags="" route="Categories/{id}">
+          <Summary>Delete a model instance by id from the data source.</Summary>
+          <Parameters>
+            <Parameter name="id" type="Guid"/>
+          </Parameters>
+        </Operation>        
+      </Operations>
+    </Resource>
+    <Resource id="Product" name="Products" routePrefix="v1">
+      <Operations>
+        <Operation id="Product_list" name="FindAllAsync" httpMethod="HttpGet" version="" tags="" route="Products">
+          <Summary>Find all instances of the model matched by filter from the data source</Summary>
+          <Parameters>
+          </Parameters>
+        </Operation>
+      </Operations>
+    </Resource>
+  </Resources>
+</ApiModel>

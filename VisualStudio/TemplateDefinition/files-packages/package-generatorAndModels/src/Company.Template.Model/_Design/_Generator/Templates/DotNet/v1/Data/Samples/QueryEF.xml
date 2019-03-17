@@ -1,0 +1,14 @@
+﻿<?xml version='1.0' encoding='iso-8859-1'?>
+<?xml-stylesheet type="text/xsl" href="../QueryEF.xsl"?>
+<Model namespace="Nova">
+  <Entities>
+    <Entity name="Product" persistenceName="BIZ_PRODUCT" pluralName="Products">
+      <Properties>
+        <Property propertyType="1" name="ProductId" type="Guid" persistenceName="PRODUCT_ID" />
+        <Property propertyType="2" name="Name" type="string" isRequired="true" persistenceName="NAME" length="50" />
+        <Property propertyType="2" name="Version" type="string" isRequired="false" persistenceName="VERSION" length="20" />
+        <Property propertyType="3" name="OrganizationId" type="Nullable&lt;int&gt;" isRequired="false" persistenceName="ORGANIZATION_ID" />
+      </Properties>
+    </Entity>
+  </Entities>
+</Model>

@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<?xml-stylesheet type="text/xsl" href="../Query.xsl"?>
+<QueryModel namespace="BroadcastAPI.Infrastructure">
+  <Queries>
+    <Query name="CheckPdvEnCoursPourPanelCP" resultType="object" type="SqlServer" connexion="connexBroadcast">
+      <Code>ven.P_CheckPdvEnCoursPourPanelCP</Code>
+      <Parameters>
+        <Parameter name="IdPanels" mapping="@IdPanels" sqlType="IntTable" type="object" />
+        <Parameter name="DateVerification" mapping="@DateVerification" sqlType="datetime" type="DateTime" />
+      </Parameters>
+    </Query>
+  </Queries>
+</QueryModel>
+

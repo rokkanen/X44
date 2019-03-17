@@ -1,0 +1,119 @@
+﻿<#
+//-----------------------------------------------------------------------
+// <copyright file="TransformationFile.ttinclude" company="RO2K">
+//     Stéphane ROKKANEN (C)
+// </copyright>
+// <author>Stephane ROKKANEN</author>
+// <summary>TransformationFile class. Describe all steps of transformation models</summary>
+// <date>Created:February,28-2012-Updated:September,03-2016</date>
+// <version>4.0.2<version>
+//-----------------------------------------------------------------------
+//	models
+//		|__model (XML Generic Model or XML Specific Model)
+//			|__transform (Template XSL)
+//-----------------------------------------------------------------------
+#>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Xml.Serialization" #><#+
+
+[XmlRoot("models")]
+public class TransformationFile {
+
+	[XmlElement("model")]
+    public List<Model> Models { get; set; }
+
+	[XmlElement("settings")]
+    public Settings Settings{ get; set; }
+
+	public TransformationFile() {
+		this.Models = new List<Model>();		
+    }
+
+    public void Save(string xmlFile) {
+        XmlSerializer serializer = new XmlSerializer(typeof(TransformationFile));
+        using (TextWriter writer = new StreamWriter(xmlFile)) {
+            serializer.Serialize(writer, this);
+        } 
+    }
+
+    public static TransformationFile Load(string xmlFile) {
+        XmlSerializer deserializer = new XmlSerializer(typeof(TransformationFile));
+        TextReader reader = new StreamReader(xmlFile);
+        object obj = deserializer.Deserialize(reader);
+        TransformationFile data = (TransformationFile)obj;
+        reader.Close();
+        return data;
+    }
+}
+
+public class Model {
+    [XmlAttribute("file")]
+    public string File { get; set; }
+
+	[XmlAttribute("enabled")]
+    public bool IsEnabled { get; set; }
+
+	[XmlElement("transform")]
+    public List<TemplateXSL> XslTemplates { get; set; }
+
+	public Model() {
+		this.IsEnabled = true;
+		this.XslTemplates = new List<TemplateXSL>();
+    }
+}
+
+public class Settings {
+	[XmlElement("setting")]
+	public List<Setting> Items { get; set; }
+
+    public Settings () {
+		this.Items = new List<Setting>();		
+    }
+}
+
+public class Setting {
+    [XmlAttribute("name")]
+    public string Name { get; set; }
+
+    [XmlAttribute("value")]
+	public string Value { get; set; }
+}
+
+public class TemplateXSL {
+    [XmlAttribute("enabled")]
+    public bool IsEnabled { get; set; }
+
+    [XmlAttribute("prefix")]
+    public string Prefix { get; set; }
+
+    [XmlAttribute("file")]
+    public string File { get; set; }
+
+    [XmlAttribute("template")]
+    public string Template { get; set; }
+
+	[XmlAttribute("targetProject")]
+    public string TargetProject { get; set; }
+
+    [XmlAttribute("targetDir")]
+    public string TargetDirectory { get; set; }
+
+	[XmlAttribute("xpathQuery")]
+    public string XPathQuery { get; set; }
+
+	[XmlAttribute("excludeKey")]
+    public bool ExcludeKey { get; set; }
+
+	[XmlAttribute("exclude")]
+    public string ExcludeEntities { get; set; }
+
+	[XmlAttribute("include")]
+    public string IncludeEntities { get; set; }
+
+	[XmlAttribute("overwrite")]
+    public bool CanOverwriteExistingFile { get; set; }
+}
+#>

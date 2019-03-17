@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApiModel namespace="Company.Template">
+  <!-- httpMethod=HttpGet(Query)|HttpPost(Insert Command)|HttpPut(Update Command)|HttpDelete(Delete Command)-->
+  <Resources>
+    <Resource id="Application" name="Application" routePrefix="v1">
+      <Operations>
+        <Operation id="Tables_list" name="FindAllTablesAsync" responseItem="TableInfo" query="FindAllTablesQuery" httpMethod="HttpGet" version="" tags="" route="Tables">
+          <Summary>Get all tables of Interface Database</Summary>
+        </Operation>
+      </Operations>
+    </Resource>
+  </Resources>
+</ApiModel>

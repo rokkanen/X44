@@ -1,0 +1,131 @@
+﻿//-----------------------------------------------------------------------
+// <copyright file="Repository.cs" company="RO2K">
+//     Copyright (c) RO2K. 
+// </copyright>
+// <author>http://www.tugberkugurlu.com/archive/generic-repository-pattern-entity-framework-asp-net-mvc-and-unit-testing-triangle</author>
+//-----------------------------------------------------------------------
+
+// http://www.bradoncode.com/blog/2012/12/creating-data-repository-using-dapper.html
+// https://github.com/StackExchange/dapper-dot-net/tree/master/Dapper.Contrib
+// A REVOIR AVEC interface Trackable Entities
+
+namespace Company.Template.Data
+{
+    using Dapper;
+    using Infrastructure;
+    using Model;
+    using System;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.Data;
+    using System.Data.SqlClient;
+    using System.Linq;
+
+    public abstract class RepositoryDapper<T, K> //: IRepository<T, K> where T : class,IEntity<K>, new()
+    {
+        private readonly string _tableName;
+
+        internal IDbConnection Connection
+        {
+            get
+            {
+                return new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString);
+            }
+        }
+
+        public RepositoryDapper(string tableName)
+        {
+            _tableName = tableName;
+        }
+
+        internal virtual dynamic Mapping(IEntity<K> item)
+        {
+            return item;
+        }
+
+        public virtual IEnumerable<T> FindAll()
+        {
+            IEnumerable<T> items = null;
+
+            using (IDbConnection cn = Connection)
+            {
+                cn.Open();
+                items = cn.Query<T>("SELECT * FROM " + _tableName);
+            }
+
+            return items;
+        }
+
+        public IEnumerable<T> Find(System.Linq.Expressions.Expression<Func<T, bool>> predicate)
+        {
+            IEnumerable<T> items = null;
+
+            // extract the dynamic sql query and parameters from predicate
+            QueryResult result = DynamicQuery.GetDynamicQuery(_tableName, predicate);
+
+            using (IDbConnection cn = Connection)
+            {
+                cn.Open();
+                items = cn.Query<T>(result.Sql, (object)result.Param);
+            }
+
+            return items;
+        }
+
+        public virtual void Add(IEntity<K> entity)
+        {
+            using (IDbConnection cn = Connection)
+            {
+                var parameters = (object)Mapping(entity);
+                cn.Open();
+                entity.Id = cn.Insert<K>(_tableName, parameters);                
+            }
+        }
+        public virtual void Add(IEnumerable<T> entities)
+        {
+            throw new NotImplementedException("Not implemented yet !"); // A REVOIR
+        }
+
+        public virtual void Delete(T entity)
+        {
+            this.Delete(entity.Id);
+        }
+
+        public virtual void Delete(K id)
+        {
+            using (IDbConnection cn = Connection)
+            {
+                cn.Open();
+                cn.Execute("DELETE FROM " + _tableName + " WHERE ID=@ID", new { ID = id }); // A REVOIR
+            }
+        }
+
+        public virtual void DeleteById(params object[] keyValues)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual void Update(T entity)
+        {
+            using (IDbConnection cn = Connection)
+            {
+                var parameters = (object)Mapping(entity);
+                cn.Open();
+                cn.Update(_tableName, parameters);
+            }
+        }
+
+        public T FindById(K id) 
+         {
+            T item = default(T);
+
+            using (IDbConnection cn = Connection)
+            {
+                cn.Open();
+                item = cn.Query<T>("SELECT * FROM " + _tableName + " WHERE ID=@ID", new { ID = id }).SingleOrDefault(); // A REVOIR
+            }
+
+            return item;
+        }
+    }
+}

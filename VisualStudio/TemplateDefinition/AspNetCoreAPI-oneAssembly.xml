@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="CreateDotNetCommand.xsl"?>
+<SoftwareSystem id="%project%" description="App">
+	<Containers>
+		<Container id="%project%.Api" technology="webapi">
+			<Components>
+			  <Component id="System.Configuration.ConfigurationManager" technology="nuget"/>
+			  <Component id="Newtonsoft.Json" technology="nuget"/>
+			  <Component id="Swashbuckle.AspNetCore" technology="nuget"/>
+			  <Component id="log4net" technology="nuget"/>
+			  <Component id="Microsoft.Extensions.Logging.Log4Net.AspNetCore" technology="nuget"/>
+			  <Component id="Dapper" technology="nuget"/>
+			  <Component id="Company.Template.Api\Business\Services" technology="folder"/>
+			  <Component id="Company.Template.Api\Business\Entities" technology="folder"/>
+			  <Component id="Company.Template.Api\Data" technology="folder"/>
+			  <Component id="package-common" technology="files-package"/>
+			  <Component id="package-generatorAndModels" technology="files-package"/>
+			  <Component id="package-webapi-core" technology="files-package"/>
+		  </Components>
+		</Container>
+	</Containers>
+</SoftwareSystem>
+ 
+ 
+ 

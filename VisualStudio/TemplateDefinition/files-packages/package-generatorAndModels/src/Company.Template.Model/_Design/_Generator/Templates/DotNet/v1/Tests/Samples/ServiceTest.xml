@@ -1,0 +1,13 @@
+﻿<?xml version='1.0' encoding='iso-8859-1'?>
+<?xml-stylesheet type="text/xsl" href="../ServiceTest.xsl"?>
+<Model namespace="RO2K.SoftwareFactory">
+  <Entities>
+    <Entity name="Project" namespace="Nova">
+      <Properties>
+        <Property name="ProjectId" type="Guid"/>
+        <Property name="Name" type="string"/>
+        <Property name="Models" type="List&lt;Model&gt;"/>
+      </Properties>
+    </Entity>
+  </Entities>
+</Model>

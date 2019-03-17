@@ -1,0 +1,65 @@
+﻿<?xml version='1.0' encoding='iso-8859-1'?>
+<?xml-stylesheet type="text/xsl" href="../Query.xsl"?>
+<Model namespace="Nova">
+  <Entities>
+    <Entity name="Category" persistenceName="Category" pluralName="Categories">
+      <Properties>
+        <Property propertyType="1" name="CategoryId" type="Guid" persistenceName="CategoryId" storeGeneratedPattern="Identity" />
+        <Property propertyType="2" name="CategoryName" type="string" isRequired="true" persistenceName="CategoryName" length="15" />
+        <Property propertyType="2" name="Description" type="string" isRequired="false" persistenceName="Description" />
+        <Property propertyType="2" name="Picture" type="byte[]" isRequired="false" persistenceName="Picture" />
+      </Properties>
+      <RelationShips>
+        <RelationShip relationType="one-to-many" name="Products" relationName="CategoryProduct" type="Product" isRequired="false" cascadeDelete="false" />
+      </RelationShips>
+    </Entity>
+    <Entity name="CategoryInfo" persistenceName="CategoryInfo" pluralName="CategoryInfoes">
+      <Properties>
+        <Property propertyType="1" name="CategoryId" type="Guid" persistenceName="CategoryId" storeGeneratedPattern="Identity" />
+        <Property propertyType="2" name="CategoryName" type="string" isRequired="true" persistenceName="CategoryName" length="15" />
+        <Property propertyType="2" name="Description" type="string" isRequired="false" persistenceName="Description" />
+        <Property propertyType="2" name="Picture" type="byte[]" isRequired="false" persistenceName="Picture" />
+      </Properties>
+      <RelationShips />
+    </Entity>
+    <Entity name="Product" persistenceName="Product" pluralName="Products">
+      <Properties>
+        <Property propertyType="1" name="ProductId" type="Guid" persistenceName="ProductId" storeGeneratedPattern="Identity" />
+        <Property propertyType="2" name="ProductName" type="string" isRequired="true" persistenceName="ProductName" length="50" />
+        <Property propertyType="2" name="UnitPrice" type="Decimal" isRequired="true" persistenceName="UnitPrice" />
+        <Property propertyType="2" name="Discontinued" type="Boolean" isRequired="true" persistenceName="Discontinued" />
+        <Property propertyType="3" name="CategoryId" type="Nullable&lt;Guid&gt;" isRequired="false" persistenceName="CategoryId" />
+      </Properties>
+      <RelationShips>
+        <RelationShip relationType="many-to-one" name="Category" relationName="CategoryProduct" type="Category" isRequired="false" cascadeDelete="false" />
+        <RelationShip relationType="many-to-many" name="Suppliers" relationName="ProductSupplier" type="Supplier" persistenceName="ProductSupplier" cascadeDelete="false" />
+      </RelationShips>
+    </Entity>
+    <Entity name="ProductInfo" persistenceName="ProductInfo" pluralName="ProductInfoes">
+      <Properties>
+        <Property propertyType="1" name="ProductId" type="Guid" persistenceName="ProductId" storeGeneratedPattern="Identity" />
+        <Property propertyType="2" name="ProductName" type="string" isRequired="true" persistenceName="ProductName" length="50" />
+        <Property propertyType="2" name="UnitPrice" type="Decimal" isRequired="true" persistenceName="UnitPrice" />
+        <Property propertyType="2" name="Discontinued" type="Boolean" isRequired="true" persistenceName="Discontinued" />
+        <Property propertyType="2" name="CategoryId" type="Nullable&lt;Guid&gt;" isRequired="false" persistenceName="CategoryId" />
+      </Properties>
+      <RelationShips />
+    </Entity>
+    <Entity name="Supplier" persistenceName="Supplier" pluralName="Suppliers">
+      <Properties>
+        <Property propertyType="1" name="SupplierId" type="int" persistenceName="SupplierId" storeGeneratedPattern="Identity" />
+        <Property propertyType="2" name="Name" type="string" isRequired="true" persistenceName="Name" />
+      </Properties>
+      <RelationShips>
+        <RelationShip relationType="many-to-many" name="Products" relationName="ProductSupplier" type="Product" persistenceName="ProductSupplier" cascadeDelete="false" />
+      </RelationShips>
+    </Entity>
+    <Entity name="SupplierInfo" persistenceName="SupplierInfo" pluralName="SupplierInfoes">
+      <Properties>
+        <Property propertyType="1" name="SupplierId" type="int" persistenceName="SupplierId" storeGeneratedPattern="Identity" />
+        <Property propertyType="2" name="Name" type="string" isRequired="true" persistenceName="Name" />
+      </Properties>
+      <RelationShips />
+    </Entity>
+  </Entities>
+</Model>

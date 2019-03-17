@@ -1,0 +1,13 @@
+﻿<?xml version='1.0' encoding='iso-8859-1'?>
+<?xml-stylesheet type="text/xsl" href="../EntitiesService.xsl"?>
+<Entity name="Project">
+  <Properties>
+    <Property name="ProjectId" type="Guid"/>
+    <Property name="Name" type="string"/>
+    <Property name="Models" type="List&lt;Model&gt;"/>
+  </Properties>
+  <RelationShips>
+    <RelationShip name="Entities" relationType="one-to-many" type="Entity" cascade="none" foreignKey="ENTITYMODELID" />
+    <RelationShip name="DataSource" relationType="many-to-one" type="DataSource" isRequired="true" persistenceName="DATASOURCEID" foreignKey="FK_DATASOURCE_ENTITYMODEL" unique="true" />
+  </RelationShips>
+</Entity>

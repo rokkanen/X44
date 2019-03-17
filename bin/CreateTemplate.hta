@@ -1,0 +1,87 @@
+<HTA:APPLICATION ID="oMe" APPLICATIONNAME="VS Template"  SINGLEINSTANCE="yes" SCROLL="no">
+<html>
+	<head>
+	<title>X44 Create Template</title>
+	<style>
+		body {
+		  	background-color:#f1f1f1;
+	  		font-family:"Trebuchet MS",Verdana,Geneva,Arial,Helvetica,sans-serif;
+	  		font-weight: normal;font-size: 12pt; 
+	  		margin:0.5em;
+		}		
+		input { width:250px;}
+	</style>
+	
+	<script language="vbscript">
+	<!--
+		Option Explicit
+		'===================================
+		const directoryApps ="C:\ApplisDotnet"
+		const templateDir="C:\DotNetTemplate\X44\VisualStudio\TemplateDefinition"
+		'===================================
+		Public appFso        'FileSystemObject
+		Public appShell      'command shell object
+		Public appFullPath   'install path
+		Public appWsh
+
+		Private Sub window_onload()
+			window.resizeTo screen.availWidth/4,screen.availHeight/2
+			window.moveTo screen.availWidth/4,screen.availHeight/4
+			set appWsh = CreateObject("WScript.Shell")
+		    Set appFso = CreateObject("Scripting.FileSystemObject")
+	    	appFullPath = appFso.GetParentFolderName(oMe.commandLine)
+	    	 'work around bug in FileSystemObject
+	    	If Left(appFullPath, 1) = """" Then appFullPath = Mid(appFullPath, 2)
+			LoadTemplates
+		End Sub
+	
+		Private Function verifChamp(field,TxtInfo)
+			verifChamp=true
+			if field="" then
+				verifChamp=false
+				msgbox TxtInfo
+			end if
+		End function
+
+		Sub cmdTemplate_OnClick
+			dim tpl, target,file, directory, sourceDir, command
+			tpl=document.frmPage.listTemplate.value
+			if verifChamp(tpl,"Select a template.")=false then exit sub
+			appWsh.CurrentDirectory = templateDir
+			command = templateDir + "\init.cmd " + tpl 
+			appWsh.run command, 1, True
+		End Sub
+
+		Sub LoadTemplates()
+			dim folderspec,ext,sHtm,mFile
+		    Dim fso, f, f1, fc, i, j, template
+			folderspec=templateDir 
+			ext =".xml"
+			Set fso = CreateObject("Scripting.FileSystemObject")
+			Set f = fso.GetFolder(folderspec)
+			Set fc = f.Files
+			sHtm = "<select name=""listTemplate"" size=""10"">"
+			For Each f1 in fc
+				If InStr(LCase(f1.name),ext)>0 Then
+					template = Replace(f1.name, ext, "")
+					sHtm=sHtm+"<option value='" + template + "'>" + template + "</option>"
+					j=j+1
+				End If
+				i=i+1
+			Next
+			sHtm = sHtm + "</select>"
+			list.innerHTML=sHtm
+		End Sub
+	-->
+	</script>
+	</head>
+<body>
+<form name="frmPage">
+	Template definition:<br/>
+	<div id="list">	
+	</div>
+	<hr/>
+	<input name="cmdTemplate" type="button" value="Create Template"><br/>
+</form>
+</body>
+</html>
