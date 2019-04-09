@@ -1,0 +1,9 @@
+﻿<#@ template hostspecific="true" #><#@ output extension="xml" #>
+<#@ include file="../../_variables.ttinclude"#><#@ include file="../../_Generator/T4/TransformModels.ttinclude"#><#
+	
+	GeneratorSettings settings = new GeneratorSettings();
+	settings.CustomPersistenceName = false;
+	
+	ProduceGenericModel("Model.edmx", settings);
+#>
+
