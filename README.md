@@ -1,7 +1,7 @@
 # Installation
 Copy and paste the command below in command shell window and run it:
 ```
-powershell -command "mkdir c:\DotNetTemplate;$webClient = New-Object –TypeName System.Net.WebClient; $webClient.DownloadFile('https://raw.githubusercontent.com/rokkanen/X44/master/boostrap-install.ps1','c:\DotNetTemplate\boostrap-install.ps1'); c:\DotNetTemplate\boostrap-install.ps1"
+powershell -command "mkdir c:\DotNetTemplate;$webClient = New-Object –TypeName System.Net.WebClient; $webClient.DownloadFile('https://raw.githubusercontent.com/rokkanen/X44/master/boostrap-install.ps1','c:\DotNetTemplate\boostrap-install.ps1'); c:\DotNetTemplate\boostrap-install.ps1 master"
 ``` 
 
 # What is X44 ?
