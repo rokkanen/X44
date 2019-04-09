@@ -13,9 +13,9 @@
 			  <Component id="Company.Template.Api\Business\Services" technology="folder"/>
 			  <Component id="Company.Template.Api\Business\Entities" technology="folder"/>
 			  <Component id="Company.Template.Api\Data" technology="folder"/>
-			  <Component id="package-common" technology="files-package"/>
-			  <Component id="package-generatorAndModels" technology="files-package"/>
-			  <Component id="package-webapi-core" technology="files-package"/>
+			  <Component id="net-core\package-common" technology="files-package"/>
+			  <Component id="net-core\package-generatorAndModels" technology="files-package"/>
+			  <Component id="net-core\package-webapi-core" technology="files-package"/>
 		  </Components>
 		</Container>
 	</Containers>
