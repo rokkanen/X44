@@ -11,34 +11,34 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Company.Template.Model" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+      <Schema Namespace="Company.Template" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
         <EntityContainer Name="DomainModelContainer" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
-          <EntitySet Name="FeatureSet" EntityType="Company.Template.Model.Feature" />
-          <EntitySet Name="DomainSet" EntityType="Company.Template.Model.Domain" />
-          <EntitySet Name="ProductSet" EntityType="Company.Template.Model.Product" />
-          <AssociationSet Name="ProductFeature" Association="Company.Template.Model.ProductFeature">
+          <EntitySet Name="FeatureSet" EntityType="Company.Template.Feature" />
+          <EntitySet Name="DomainSet" EntityType="Company.Template.Domain" />
+          <EntitySet Name="ProductSet" EntityType="Company.Template.Product" />
+          <AssociationSet Name="ProductFeature" Association="Company.Template.ProductFeature">
             <End Role="Product" EntitySet="ProductSet" />
             <End Role="Feature" EntitySet="FeatureSet" />
           </AssociationSet>
-          <EntitySet Name="OrganizationSet" EntityType="Company.Template.Model.Organization" />
-          <EntitySet Name="RoleSet" EntityType="Company.Template.Model.Role" />
-          <AssociationSet Name="OrganizationRole" Association="Company.Template.Model.OrganizationRole">
+          <EntitySet Name="OrganizationSet" EntityType="Company.Template.Organization" />
+          <EntitySet Name="RoleSet" EntityType="Company.Template.Role" />
+          <AssociationSet Name="OrganizationRole" Association="Company.Template.OrganizationRole">
             <End Role="Organization" EntitySet="OrganizationSet" />
             <End Role="Role" EntitySet="RoleSet" />
           </AssociationSet>
-          <AssociationSet Name="RoleFeature" Association="Company.Template.Model.RoleFeature">
+          <AssociationSet Name="RoleFeature" Association="Company.Template.RoleFeature">
             <End Role="Role" EntitySet="RoleSet" />
             <End Role="Feature" EntitySet="FeatureSet" />
           </AssociationSet>
-          <AssociationSet Name="DomainFeature" Association="Company.Template.Model.DomainFeature">
+          <AssociationSet Name="DomainFeature" Association="Company.Template.DomainFeature">
             <End Role="Domain" EntitySet="DomainSet" />
             <End Role="Feature" EntitySet="FeatureSet" />
           </AssociationSet>
-          <AssociationSet Name="OrganizationDomain" Association="Company.Template.Model.OrganizationDomain">
+          <AssociationSet Name="OrganizationDomain" Association="Company.Template.OrganizationDomain">
             <End Role="Organization" EntitySet="OrganizationSet" />
             <End Role="Domain" EntitySet="DomainSet" />
           </AssociationSet>
-          <AssociationSet Name="OrganizationProduct" Association="Company.Template.Model.OrganizationProduct">
+          <AssociationSet Name="OrganizationProduct" Association="Company.Template.OrganizationProduct">
             <End Role="Organization" EntitySet="OrganizationSet" />
             <End Role="Product" EntitySet="ProductSet" />
           </AssociationSet>
@@ -57,10 +57,10 @@
           </Property>
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" />
           <Property Name="Description" Type="String" MaxLength="1024" Nullable="true" />
-          <NavigationProperty Name="Products" Relationship="Company.Template.Model.ProductFeature" FromRole="Feature" ToRole="Product" />
+          <NavigationProperty Name="Products" Relationship="Company.Template.ProductFeature" FromRole="Feature" ToRole="Product" />
           <Property Name="Title" Type="String" Nullable="false" />
-          <NavigationProperty Name="Roles" Relationship="Company.Template.Model.RoleFeature" FromRole="Feature" ToRole="Role" />
-          <NavigationProperty Name="Domain" Relationship="Company.Template.Model.DomainFeature" FromRole="Feature" ToRole="Domain" />
+          <NavigationProperty Name="Roles" Relationship="Company.Template.RoleFeature" FromRole="Feature" ToRole="Role" />
+          <NavigationProperty Name="Domain" Relationship="Company.Template.DomainFeature" FromRole="Feature" ToRole="Domain" />
           <Property Name="DomainId" Type="Int32" Nullable="true" >
             <Documentation>
               <LongDescription>PersistenceName=DOMAIN_ID</LongDescription>
@@ -80,8 +80,8 @@
             </Documentation>
           </Property>
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" />
-          <NavigationProperty Name="Features" Relationship="Company.Template.Model.DomainFeature" FromRole="Domain" ToRole="Feature" />
-          <NavigationProperty Name="Organizations" Relationship="Company.Template.Model.OrganizationDomain" FromRole="Domain" ToRole="Organization" />
+          <NavigationProperty Name="Features" Relationship="Company.Template.DomainFeature" FromRole="Domain" ToRole="Feature" />
+          <NavigationProperty Name="Organizations" Relationship="Company.Template.OrganizationDomain" FromRole="Domain" ToRole="Organization" />
         </EntityType>
         <EntityType Name="Product">
           <Documentation>
@@ -97,16 +97,16 @@
           </Property>
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" />
           <Property Name="Version" Type="String" MaxLength="20" Nullable="true" />
-          <NavigationProperty Name="Features" Relationship="Company.Template.Model.ProductFeature" FromRole="Product" ToRole="Feature" />
+          <NavigationProperty Name="Features" Relationship="Company.Template.ProductFeature" FromRole="Product" ToRole="Feature" />
           <Property Name="ProductType" Type="String" Nullable="true" />
-          <NavigationProperty Name="Organizations" Relationship="Company.Template.Model.OrganizationProduct" FromRole="Product" ToRole="Organization" />
+          <NavigationProperty Name="Organizations" Relationship="Company.Template.OrganizationProduct" FromRole="Product" ToRole="Organization" />
         </EntityType>
         <Association Name="ProductFeature">
           <Documentation>
             <LongDescription>PersistenceName=BIZ_PRODUCT_FEATURE</LongDescription>
           </Documentation>
-          <End Type="Company.Template.Model.Product" Role="Product" Multiplicity="*" />
-          <End Type="Company.Template.Model.Feature" Role="Feature" Multiplicity="*" />
+          <End Type="Company.Template.Product" Role="Product" Multiplicity="*" />
+          <End Type="Company.Template.Feature" Role="Feature" Multiplicity="*" />
         </Association>
         <EntityType Name="Organization">
           <Documentation>
@@ -121,11 +121,11 @@
             </Documentation>
           </Property>
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" />
-          <NavigationProperty Name="Roles" Relationship="Company.Template.Model.OrganizationRole" FromRole="Organization" ToRole="Role" />
+          <NavigationProperty Name="Roles" Relationship="Company.Template.OrganizationRole" FromRole="Organization" ToRole="Role" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="20" />
           <Property Name="OrganizationType" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Domains" Relationship="Company.Template.Model.OrganizationDomain" FromRole="Organization" ToRole="Domain" />
-          <NavigationProperty Name="Products" Relationship="Company.Template.Model.OrganizationProduct" FromRole="Organization" ToRole="Product" />
+          <NavigationProperty Name="Domains" Relationship="Company.Template.OrganizationDomain" FromRole="Organization" ToRole="Domain" />
+          <NavigationProperty Name="Products" Relationship="Company.Template.OrganizationProduct" FromRole="Organization" ToRole="Product" />
         </EntityType>
         <EnumType Name="OrganizationType">
           <Member Name="Internal" Value="1" />
@@ -145,17 +145,17 @@
             </Documentation>
           </Property>
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" />
-          <NavigationProperty Name="Organization" Relationship="Company.Template.Model.OrganizationRole" FromRole="Role" ToRole="Organization" />
+          <NavigationProperty Name="Organization" Relationship="Company.Template.OrganizationRole" FromRole="Role" ToRole="Organization" />
           <Property Name="OrganizationId" Type="Int32" Nullable="true" >
             <Documentation>
               <LongDescription>PersistenceName=ORGANIZATION_ID</LongDescription>
             </Documentation>
           </Property>
-          <NavigationProperty Name="Features" Relationship="Company.Template.Model.RoleFeature" FromRole="Role" ToRole="Feature" />
+          <NavigationProperty Name="Features" Relationship="Company.Template.RoleFeature" FromRole="Role" ToRole="Feature" />
         </EntityType>
         <Association Name="OrganizationRole">
-          <End Type="Company.Template.Model.Organization" Role="Organization" Multiplicity="0..1" />
-          <End Type="Company.Template.Model.Role" Role="Role" Multiplicity="*" />
+          <End Type="Company.Template.Organization" Role="Organization" Multiplicity="0..1" />
+          <End Type="Company.Template.Role" Role="Role" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Organization">
               <PropertyRef Name="OrganizationId" />
@@ -169,12 +169,12 @@
           <Documentation>
             <LongDescription>PersistenceName=BIZ_ROLE_FEATURE</LongDescription>
           </Documentation>
-          <End Type="Company.Template.Model.Role" Role="Role" Multiplicity="*" />
-          <End Type="Company.Template.Model.Feature" Role="Feature" Multiplicity="*" />
+          <End Type="Company.Template.Role" Role="Role" Multiplicity="*" />
+          <End Type="Company.Template.Feature" Role="Feature" Multiplicity="*" />
         </Association>
         <Association Name="DomainFeature">
-          <End Type="Company.Template.Model.Domain" Role="Domain" Multiplicity="0..1" />
-          <End Type="Company.Template.Model.Feature" Role="Feature" Multiplicity="*" />
+          <End Type="Company.Template.Domain" Role="Domain" Multiplicity="0..1" />
+          <End Type="Company.Template.Feature" Role="Feature" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Domain">
               <PropertyRef Name="DomainId" />
@@ -185,12 +185,12 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="OrganizationDomain">
-          <End Type="Company.Template.Model.Organization" Role="Organization" Multiplicity="*" />
-          <End Type="Company.Template.Model.Domain" Role="Domain" Multiplicity="*" />
+          <End Type="Company.Template.Organization" Role="Organization" Multiplicity="*" />
+          <End Type="Company.Template.Domain" Role="Domain" Multiplicity="*" />
         </Association>
         <Association Name="OrganizationProduct">
-          <End Type="Company.Template.Model.Organization" Role="Organization" Multiplicity="*" />
-          <End Type="Company.Template.Model.Product" Role="Product" Multiplicity="*" />
+          <End Type="Company.Template.Organization" Role="Organization" Multiplicity="*" />
+          <End Type="Company.Template.Product" Role="Product" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -222,18 +222,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <edmx:Diagram Name="Entities" DisplayType="true" ZoomLevel="66">
-        <edmx:EntityTypeShape EntityType="Company.Template.Model.Feature" Width="1.75" PointX="5.75" PointY="2.875" />
-        <edmx:EntityTypeShape EntityType="Company.Template.Model.Domain" Width="1.625" PointX="3.375" PointY="0.5" />
-        <edmx:EntityTypeShape EntityType="Company.Template.Model.Product" Width="1.625" PointX="3.375" PointY="5.5" FillColor="0, 122, 204" />
-        <edmx:AssociationConnector Association="Company.Template.Model.ProductFeature" ManuallyRouted="false" >
+        <edmx:EntityTypeShape EntityType="Company.Template.Feature" Width="1.75" PointX="5.75" PointY="2.875" />
+        <edmx:EntityTypeShape EntityType="Company.Template.Domain" Width="1.625" PointX="3.375" PointY="0.5" />
+        <edmx:EntityTypeShape EntityType="Company.Template.Product" Width="1.625" PointX="3.375" PointY="5.5" FillColor="0, 122, 204" />
+        <edmx:AssociationConnector Association="Company.Template.ProductFeature" ManuallyRouted="false" >
         </edmx:AssociationConnector>
-        <edmx:EntityTypeShape EntityType="Company.Template.Model.Organization" Width="1.75" PointX="0.625" PointY="3" IsExpanded="true" />
-        <edmx:EntityTypeShape EntityType="Company.Template.Model.Role" Width="1.625" PointX="3.375" PointY="2.875" />
-        <edmx:AssociationConnector Association="Company.Template.Model.OrganizationRole" />
-        <edmx:AssociationConnector Association="Company.Template.Model.RoleFeature" />
-        <edmx:AssociationConnector Association="Company.Template.Model.DomainFeature" />
-        <edmx:AssociationConnector Association="Company.Template.Model.OrganizationDomain" />
-        <edmx:AssociationConnector Association="Company.Template.Model.OrganizationProduct" />
+        <edmx:EntityTypeShape EntityType="Company.Template.Organization" Width="1.75" PointX="0.625" PointY="3" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="Company.Template.Role" Width="1.625" PointX="3.375" PointY="2.875" />
+        <edmx:AssociationConnector Association="Company.Template.OrganizationRole" />
+        <edmx:AssociationConnector Association="Company.Template.RoleFeature" />
+        <edmx:AssociationConnector Association="Company.Template.DomainFeature" />
+        <edmx:AssociationConnector Association="Company.Template.OrganizationDomain" />
+        <edmx:AssociationConnector Association="Company.Template.OrganizationProduct" />
         </edmx:Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

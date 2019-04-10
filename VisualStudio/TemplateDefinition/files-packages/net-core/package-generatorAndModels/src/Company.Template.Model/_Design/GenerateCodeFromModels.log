@@ -1,0 +1,30 @@
+﻿*** Start 03:43:20 ***
+
+// Generated helper templates
+// Generated items
+// Company.Template.Model\Company.Template.Api\#Generated\Controllers\ApplicationController.cs
+// Company.Template.Model\Company.Template.Api\#Generated\Data\Queries\FindAllTablesQuery.cs
+// Company.Template.Model\Company.Template.Api\#Generated\Data\Mapping\ManyToMany\RoleMap.cs
+// Company.Template.Model\Company.Template.Api\#Generated\Data\Mapping\ManyToMany\ProductMap.cs
+// Company.Template.Model\Company.Template.Api\#Generated\Data\Mapping\ManyToMany\OrganizationMap.cs
+// Company.Template.Model\Company.Template.Api\#Generated\Data\Mapping\RoleMap.cs
+// Company.Template.Model\Company.Template.Api\#Generated\Data\Mapping\ProductMap.cs
+// Company.Template.Model\Company.Template.Api\#Generated\Data\Mapping\OrganizationMap.cs
+// Company.Template.Model\Company.Template.Api\#Generated\Data\Mapping\FeatureMap.cs
+// Company.Template.Model\Company.Template.Api\#Generated\Data\Mapping\DomainMap.cs
+// Company.Template.Model\Company.Template.Api\#Generated\Data\Contexts\DatabaseContext.cs
+// Company.Template.Model\Company.Template.Api\#Generated\Business\Models\ManyToMany\Role.cs
+// Company.Template.Model\Company.Template.Api\#Generated\Business\Models\ManyToMany\Product.cs
+// Company.Template.Model\Company.Template.Api\#Generated\Business\Models\ManyToMany\Organization.cs
+// Company.Template.Model\Company.Template.Api\#Generated\Business\Models\ManyToMany\Feature.cs
+// Company.Template.Model\Company.Template.Api\#Generated\Business\Models\ManyToMany\Domain.cs
+// Company.Template.Model\Company.Template.Api\#Generated\Business\Models\Role.cs
+// Company.Template.Model\Company.Template.Api\#Generated\Business\Models\Product.cs
+// Company.Template.Model\Company.Template.Api\#Generated\Business\Models\Organization.cs
+// Company.Template.Model\Company.Template.Api\#Generated\Business\Models\Feature.cs
+// Company.Template.Model\Company.Template.Api\#Generated\Business\Models\Domain.cs
+// Company.Template.Model\Company.Template.Api\#Generated\Business\Models\TableInfo.cs
+
+22 Files generated.
+
+*** End 03:43:22 ***
