@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="_Design\AppModels\ApiModel.xml" />
+    <Content Include="_Design\AppModels\ApiModelOrganisation.xml" />
     <Content Include="_Design\AppModels\DataCommandModel.xml" />
     <Content Include="_Design\AppModels\DataQueryModel.xml" />
     <Content Include="_Design\CodeGenerationWorkflow.xml" />
@@ -54,10 +55,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model.generic.xml</LastGenOutput>
     </Content>
-    <Content Include="_Design\EntityModels\Main\Model.generic.xml">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.generic.tt</DependentUpon>
+    <Content Include="_Design\EntityModels\organization\Model.generic.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model.generic.xml</LastGenOutput>
     </Content>
     <Content Include="_Design\GenerateCodeFromModels.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -178,6 +178,10 @@
     <None Include="Doc\UIModel.dgml" />
     <None Include="packages.config" />
     <EntityDeploy Include="_Design\EntityModels\Main\Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="_Design\EntityModels\organization\Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>

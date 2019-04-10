@@ -12,13 +12,22 @@
     <setting name="$xcommand"           value="//Command"/>
     <setting name="$xapi"               value="//Resource"/>
   </settings>
-  <model file="EntityModels/Main/Model.generic.xml" enabled="1">
+  <model file="EntityModels/Main/Model.generic.xml" enabled="0">
     <!-- ############ BUSINESS LAYER ############ -->
     <transform enabled="1" template="DotNetCore\v1\Business.Entities\Entities.xsl" prefix="" file=".cs"                targetProject="{0}.Api" targetDir="#Generated\Business\Models"         xpathQuery="$xentity"/>
     <!-- ############ DATA LAYER (Entity Framework - Optionnal Feature) ############ -->                  
     <transform enabled="0" template="DotNetCore\v1\Data\DbContext.xsl"             prefix="" file="DatabaseContext.cs" targetProject="{0}.Api" targetDir="#Generated\Data\Contexts"/>
     <transform enabled="0" template="DotNetCore\v1\Data\Mapping.xsl"               prefix="" file="Map.cs"             targetProject="{0}.Api" targetDir="#Generated\Data\Mapping"            xpathQuery="$xentity"/>
     <transform enabled="0" template="DotNetCore\v1\Data\MappingMany2Many.xsl"      prefix="" file="Map.cs"             targetProject="{0}.Api" targetDir="#Generated\Data\Mapping\ManyToMany" xpathQuery="$xentityRelationMap"/>
+  </model>
+  <!-- Sample Model -->
+  <model file="EntityModels/organization/Model.generic.xml" enabled="1">
+    <!-- ############ BUSINESS LAYER ############ -->
+    <transform enabled="1" template="DotNetCore\v1\Business.Entities\Entities.xsl" prefix="" file=".cs"                targetProject="{0}.Api" targetDir="#Generated\Business\Models"         xpathQuery="$xentity"/>
+    <!-- ############ DATA LAYER (Entity Framework - Optionnal Feature) ############ -->                  
+    <transform enabled="1" template="DotNetCore\v1\Data\DbContext.xsl"             prefix="" file="DatabaseContext.cs" targetProject="{0}.Api" targetDir="#Generated\Data\Contexts"/>
+    <transform enabled="1" template="DotNetCore\v1\Data\Mapping.xsl"               prefix="" file="Map.cs"             targetProject="{0}.Api" targetDir="#Generated\Data\Mapping"            xpathQuery="$xentity"/>
+    <transform enabled="1" template="DotNetCore\v1\Data\MappingMany2Many.xsl"      prefix="" file="Map.cs"             targetProject="{0}.Api" targetDir="#Generated\Data\Mapping\ManyToMany" xpathQuery="$xentityRelationMap"/>
   </model>
   <!-- ############ DATA LAYER (Commands and queries) ############-->
   <model file="AppModels/DataQueryModel.xml" enabled="1">
@@ -29,6 +38,11 @@
   </model>
   <!-- ############ SERVICE LAYER (API and Proxies C#) ############ -->
   <model file="AppModels/ApiModel.xml" enabled="1">
+    <transform enabled="1" template="DotNetCore\v1\Api\WebApiController.xsl"       prefix="" file="Controller.cs"      targetProject="{0}.Api" targetDir="#Generated\Controllers"             xpathQuery="$xapi"/>
+    <transform enabled="0" template="DotNetCore\v1\Api\ApiClientProxy.xsl"         prefix="" file="Client.cs"          targetProject="{0}.Api" targetDir="#Generated\Client"/>
+  </model>
+  <!-- Sample API -->
+  <model file="AppModels/ApiModelOrganisation.xml" enabled="1">
     <transform enabled="1" template="DotNetCore\v1\Api\WebApiController.xsl"       prefix="" file="Controller.cs"      targetProject="{0}.Api" targetDir="#Generated\Controllers"             xpathQuery="$xapi"/>
     <transform enabled="0" template="DotNetCore\v1\Api\ApiClientProxy.xsl"         prefix="" file="Client.cs"          targetProject="{0}.Api" targetDir="#Generated\Client"/>
   </model>

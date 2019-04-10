@@ -16,7 +16,6 @@
 			  <Component id="net-core\package-common" technology="files-package"/>
 			  <Component id="net-core\package-generatorAndModels" technology="files-package"/>
 			  <Component id="net-core\package-webapi-core" technology="files-package"/>
-			  <Component id="net-core\package-edmx-organization" technology="files-package"/>
 		  </Components>
 		</Container>
 	</Containers>
