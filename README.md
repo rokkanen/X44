@@ -3,13 +3,13 @@ I'm rewriting code generation  toolchain for .NET/JS or whatever with more open/
 - Model description with YAML (parsing with [js-yaml](https://www.npmjs.com/package/js-yaml))
 - Templating with [handlebars](https://handlebarsjs.com/)
 - Scaffolding with [Hygen](http://www.hygen.io/)
-**
+
 # Installation
 Copy and paste the command below in command shell window and run it:
 ```
 powershell -command "mkdir c:\DotNetTemplate;$webClient = New-Object –TypeName System.Net.WebClient; $webClient.DownloadFile('https://raw.githubusercontent.com/rokkanen/X44/master/boostrap-install.ps1','c:\DotNetTemplate\boostrap-install.ps1'); c:\DotNetTemplate\boostrap-install.ps1 master"
 ``` 
-** 
+
 # What is X44 ?
 X44 is an acronym (of acronyms!) for XSLT (eXtensible Stylesheet Language Transformation)  for T4 (Text Template Transformation Toolkit).
 X44 extends the code generation functionality of the T4 text templates in Visual Studio 201x by providing the ability to use XML and XSL transformation for text template transformation, with T4 acting as a hosting system for XSL Transformations (XSLT).
