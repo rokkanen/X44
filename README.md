@@ -1,14 +1,14 @@
-# Installation
-Copy and paste the command below in command shell window and run it:
-```
-powershell -command "mkdir c:\DotNetTemplate;$webClient = New-Object –TypeName System.Net.WebClient; $webClient.DownloadFile('https://raw.githubusercontent.com/rokkanen/X44/master/boostrap-install.ps1','c:\DotNetTemplate\boostrap-install.ps1'); c:\DotNetTemplate\boostrap-install.ps1 master"
-``` 
-**
 # THIS PROJECT IS DEPRECATED
 I'm rewriting code generation  toolchain for .NET/JS or whatever with more open/simple/powerfull tools based on nodeJS stack:
 - Model description with YAML (parsing with [js-yaml](https://www.npmjs.com/package/js-yaml))
 - Templating with [handlebars](https://handlebarsjs.com/)
 - Scaffolding with [Hygen](http://www.hygen.io/)
+**
+# Installation
+Copy and paste the command below in command shell window and run it:
+```
+powershell -command "mkdir c:\DotNetTemplate;$webClient = New-Object –TypeName System.Net.WebClient; $webClient.DownloadFile('https://raw.githubusercontent.com/rokkanen/X44/master/boostrap-install.ps1','c:\DotNetTemplate\boostrap-install.ps1'); c:\DotNetTemplate\boostrap-install.ps1 master"
+``` 
 ** 
 # What is X44 ?
 X44 is an acronym (of acronyms!) for XSLT (eXtensible Stylesheet Language Transformation)  for T4 (Text Template Transformation Toolkit).
