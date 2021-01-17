@@ -18,7 +18,7 @@ It allows you to:
   * WebApi
 - Describe your own Models in XML Format and your own XSL Templates and transform it to code via XSL Transformation templates and T4
 - Use Entity Framework 6.x to design Entities Model to produce “Code First” Entity framework code: DbContexts, Mappings, and Entities.
-- Upgrade Entity Framework Designer 6.x to be compatible for .NET Core!
+- Upgrade Entity Framework Designer 6.x to be compatible for .NET Core / .NET 5 !
 - Generate a simple XML Entity Model file from an .EDMX (ADO.NET Entity Data Model) file for simple and easy XSL parsing
 - Generate multiple output files from a single XSL template and  XML source 
 - Automatically add output files to one or more projects and folders
