@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
 using System.IO;
@@ -8,7 +8,6 @@ using System.Reflection;
 
 namespace Company.Template.Api
 {
-
     /// <summary>
     /// Swagger configuration class
     /// </summary>
@@ -18,7 +17,7 @@ namespace Company.Template.Api
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Company.Template.Api API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Company.Template.Api API", Version = "v1" });
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
