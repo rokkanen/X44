@@ -1,9 +1,3 @@
-# THIS PROJECT IS DEPRECATED
-I'm rewriting code generation  toolchain for .NET/JS or whatever with more open/simple/powerfull tools based on nodeJS stack:
-- Model description with YAML (parsing with [js-yaml](https://www.npmjs.com/package/js-yaml))
-- Templating with [handlebars](https://handlebarsjs.com/)
-- Scaffolding with [Hygen](http://www.hygen.io/)
-
 # Installation
 Copy and paste the command below in command shell window and run it:
 ```
