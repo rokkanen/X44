@@ -60,7 +60,7 @@
 				command = sourceDir + "\createnetcore.cmd " + prj + " " + sourceDir 
 				appWsh.run command, 1, True
 			Else
-				command = "powershell.exe -executionpolicy unrestricted dotnet-create " + prj + " " + tpl 
+				command = "powershell.exe -executionpolicy RemoteSigned dotnet-create " + prj + " " + tpl 
 				appWsh.run command
 			End If
 		End Sub
