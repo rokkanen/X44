@@ -1,0 +1,43 @@
+REM ============================================
+REM FileName:    deployProject.cmd
+REM Description: deploy a project from WebDeploy packages
+REM Authors:     Stephane ROKKANEN
+REM Created:     December 14,2015
+REM Updated:     March 05,2021
+REM Version:     2.0.0
+REM ============================================
+@echo off
+set server=%1
+set parameters=%2
+set projectName=%3
+set deploycmd=%projectName%.deploy.cmd
+REM FOR WEBSITE = set deploycmd=website.deploy.cmd
+
+set paramFile=%parameters%
+
+if not exist %paramFile% (
+	color 0C
+	echo *-------------------------------- ERROR ---------------------------------------*
+	echo %paramFile% file does not exist 
+	echo --------------------------------------------------------------------------------
+	pause
+	exit /B 1
+)
+
+echo  Search for forgotten [ToChange]:
+findStr /i /n "\[ToChange\]" %paramFile%
+if %ERRORLEVEL%==0 (
+	color 0C
+	echo *-------------------------------- ERROR ---------------------------------------*
+	echo The %paramFile% need to be modify. [ToChange] strings have not been replaced. 
+	echo --------------------------------------------------------------------------------
+	pause
+	exit /B 1
+) else (
+	echo  OK: Nothing found
+) 
+
+REM if you want use credentatials, add theses parameters  /U:[YOUR USERNAME] /P:[YOUR PASSWORD]
+@call %deploycmd% /Y /M:%server% -setParamFile:%paramFile%
+
+

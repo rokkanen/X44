@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Custom XML File loaded by HTA Setup helper (_setup.hta)-->
+<environments>
+  <environment id="local">
+    <title>Machine Locale</title>
+    <file>SetParameters-local.xml</file>
+    <!-- Write here the iis host -->
+    <host>localhost</host>
+    <!-- Write here the url to check -->
+    <url>http://localhost/Company.Template.Web/swagger</url>
+  </environment>
+  <environment id="dev">
+    <title>Environnement de développement</title>
+    <file>SetParameters-dev.xml</file>
+    <host>host1</host>
+    <url>http://sdeviis01.lebonmarche.local/Company.Template.Web/swagger</url>
+  </environment>
+  <environment id="qualif">
+    <title>Environnement de qualification</title>
+    <file>SetParameters-qualif.xml</file>
+    <host>host2</host>
+    <url>https://sprddev11.lebonmarche.local/Company.Template.Web/swagger</url>
+  </environment>
+  <environment id="ppr">
+    <title>Environnement de Pré-production</title>
+    <file>SetParameters-ppr.xml</file>
+    <host>[ToChange]</host>
+    <url>[ToChange]</url>
+  </environment>
+  <environment id="pro">
+    <title>Environnement de Production</title>
+    <file>SetParameters-pro.xml</file>
+    <host>[ToChange]</host>
+    <url>[ToChange]</url>
+  </environment>
+</environments>
+

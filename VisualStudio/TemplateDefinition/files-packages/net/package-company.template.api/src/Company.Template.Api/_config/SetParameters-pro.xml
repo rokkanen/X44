@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <setParameter name="IIS Web Application Name" value="Company.Template.Api" />
+  <setParameter name="DefaultConnectionString" value="Data Source=mssqldev;Initial Catalog=Company.Template;Persist Security Info=True;Trusted_Connection=True;" />
+ </parameters>
+

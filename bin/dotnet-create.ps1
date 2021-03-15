@@ -1,7 +1,7 @@
-## create-project v1.0
+## dotnet-create.ps1 v1.1
 ####################################################################################################
 ## Author: George Mauer (gmauer@gmail.com)
-## Updated by: S.ROKKANEN
+## Updated by: S.ROKKANEN / 2011
 ## Licence: GNU General Public License v3
 ## Copyright 2009
 ####################################################################################################
@@ -14,8 +14,8 @@
 ## Tokens are set in the $tokens hash (see below) and are replaced by the results of a script block.
 ####################################################################################################
 ## Version History
-## 1.0 First Release
-## 1.1 Adapatation
+## 1.0 First Release 2011
+## 1.1 Adapatation 	 2011
 ####################################################################################################
 ## Usage:
 ##   dotnet-create [ProjectName]
@@ -33,7 +33,7 @@ if(!$projectname) {
 
 $template = $args[1]
 if(!$template) {
-	$template="RO2K.Template"
+	$template="Company.Template"
 }
 $templatespathOk=$templatespath+$template
 
@@ -107,7 +107,7 @@ foreach($filepath in $files) {
 	        $newfilepath = Replace-Tokens $filepath @{$templatespath={$projectname}}
 	        $newfilepath = Replace-Tokens $newfilepath $tokens
 	        echo "Remplacement $newfilepath"
-	        if ($newfilepath.contains("DipMetaModel.xml") -or $newfilepath.contains(".htm"))
+	        if ($newfilepath.contains(".cmd") -or $newfilepath.contains(".deploy"))
 	        {
 		        Set-Content $newfilepath $contents
 	        }
@@ -118,4 +118,4 @@ foreach($filepath in $files) {
         }
     }
 
-start "$projectname\src\$projectname.sln"
+# start "$projectname\src\$projectname.sln"

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<parameters>
+  <!-- This file is used with WebDeploy process (deploy.cmd). It defines areas to change depending on the environment -->
+  <!-- the values of areas are defined in the below files in _config folder :-->
+  <!-- SetParameters-local.xml -->
+  <!-- SetParameters-dev.xml -->
+  <!-- SetParameters-qualif.xml -->
+  <!-- SetParameters-ppr.xml -->
+  <!-- SetParameters-pro.xml -->
+  <!-- ############ Web.config ############################################################ -->
+  <!-- Define each variable you want replace in Web.config 
+  -->
+  <parameter name="DefaultConnectionString"
+           description="connection string"
+           defaultValue="[Set value only for VS Publish Wizard]"
+           tags="">
+    <parameterEntry kind="XmlFile"
+      scope="Web.config$"
+      match="/configuration/connectionStrings/add[@name='DefaultConnectionString']/@connectionString" />
+  </parameter>
+</parameters>

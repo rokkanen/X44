@@ -1,0 +1,138 @@
+﻿<HTA:APPLICATION ID="oMe" APPLICATIONNAME="AxaCS Template Installer" SINGLEINSTANCE="yes" MAXIMIZEBUTTON="no" MINIMIZEBUTTON="no" SCROLL="no" CONTEXTMENU= "no"  SYSMENU="no" VERSION="1.0" BORDER="thin">	
+<html>
+	<head>
+	<title>Deploy application(s) on IIS</title>	
+	<style>
+		body {
+			background-color:#f1f1f1;
+	  		font-family:"Trebuchet MS",Verdana,Geneva,Arial,Helvetica,sans-serif;
+	  		font-weight: normal;font-size: 10pt; 
+		}	
+		Input {
+			width:72px;
+		}	
+	</style>
+
+	<xml id="settings" src="environments.xml"/>
+	
+	<script language="vbscript">
+	<!--
+		Option Explicit				
+		Public appFso        'FileSystemObject
+		Public appShell      'command shell object		
+		Public appFullPath   'install path
+		Public appWsh
+		Public host, paramFile, appUrl
+		const command="deploy.cmd "
+				
+		Private Sub window_onload()
+		    window.resizeTo 600,350
+			set appWsh = CreateObject("WScript.Shell")
+		    Set appFso = CreateObject("Scripting.FileSystemObject")	    	    
+	
+	    	appFullPath = appFso.GetParentFolderName(oMe.commandLine)			
+	    	 'work around bug in FileSystemObject
+	    	If Left(appFullPath, 1) = """" Then appFullPath = Mid(appFullPath, 2)    	    		    	
+			
+			loadCombo
+		End Sub		
+				
+		Private Sub cmdExit_OnClick	
+			Close
+		End Sub
+        
+        Private Sub cmdCheck_OnClick	
+			Dim param, msg
+						
+			param=document.frmPage.lstEnv.value
+			if param="" then
+				MsgBox "Select an environment!"
+			else
+                appUrl = getField(param, "url")                
+                if appUrl="" then
+                    MsgBox "url for checking is not defined!"
+                else
+                    appWsh.run appUrl
+                end if
+            end if
+		End Sub
+		
+		Private Sub cmdRun_OnClick	
+			Dim param, msg
+						
+			param=document.frmPage.lstEnv.value
+			if param="" then
+				MsgBox "Select an environment!"
+			else
+				host = getField(param, "host")
+				paramFile = getField(param, "file")
+                appUrl = getField(param, "url")                
+				
+				if checkParamOk=true then
+					msg = "Are-you sure you want install application on [" + getField(param, "host") + "] server?"
+					msg = vbcrlf + "command: " + command + host + " " + paramFile
+					If MsgBox(msg,VbYesNo,"Setup") = VbYes Then
+						appWsh.run command + host + " " + paramFile
+					End if
+				end if
+			end if
+		End Sub			
+			
+		Public sub loadCombo
+			Dim xenvs,xitem,xnode,opt
+			Set xenvs = settings.SelectNodes("/environments/environment")
+			If Not xenvs Is Nothing Then
+				For Each xitem In xenvs
+					Set opt = document.CreateElement("OPTION")
+					opt.Value = xitem.getAttribute("id")				
+					opt.Text = xitem.selectSingleNode("title").text
+					document.frmPage.lstEnv.add opt		        		
+					set opt=nothing
+				Next
+			End If			
+		End Sub
+
+		Public function getField(key, field)		
+			dim xpath, xenv
+			getField = ""
+			xpath = "/environments/environment[@id='" + key + "']/" + field
+			set xenv=settings.selectSingleNode(xpath)
+			If Not xenv Is Nothing Then				
+				getField = xenv.text
+			End if
+		End function		
+
+		public function checkParamOk
+			checkParamOk = false
+			if host = "" then
+				MsgBox "IIS Server (Host) is not defined!"
+				exit function
+			end if 
+			if paramFile = "" then
+				MsgBox "Parameter file is not defined!"
+				exit function
+			end if 
+
+            if appUrl="" then
+                appUrl = "http://" + host
+            end if 
+			checkParamOk = true			
+		end function
+	-->	
+	</script>
+	</head>
+<body>
+<form name="frmPage">
+	<div id="selection">	
+		<h5>Select environment you want install:</h5>
+		<select name="lstEnv" size="6">				
+		</select>	
+		<br/>
+	</div> 
+	<hr/>
+	<input name="cmdRun" type="button" value="Install"/>
+	<input name="cmdCheck" type="button" value="Check"/>
+	<input name="cmdExit" type="button" value="Exit"/>
+</form>	
+</body>
+</html>
