@@ -1,15 +1,15 @@
 $solutionName="X44"
 $rootTemplate="c:\DotNetTemplate"
-$repository="https://github.com/rokkanen/$solutionName"
+$repository="https://github.com/rokkanen/X44"
 $shortcut1=$rootTemplate + "\X44\bin\CreateApplication.hta"
 $shortcut2=$rootTemplate + "\X44\bin\CreateTemplate.hta"
-$branch=$args[0]
+$DesktopPath = [Environment]::GetFolderPath("Desktop")
 
 function installProgram(){
    mkdir -Force $rootTemplate
    cd $rootTemplate
-   git clone $repository -b $branch
-   rmdir -Force -Recurse $solutionName\.git
+   git clone $repository -b master
+   rmdir -Force -Recurse .\X44\.git
    .\X44\bin\install-alias.ps1
 } 
  
@@ -22,5 +22,5 @@ function createShorcut(){
 }
 
 installProgram
-createShorcut $shortcut1 "$Home\Desktop\X44 CreateApplication.lnk"
-createShorcut $shortcut2 "$Home\Desktop\X44 CreateTemplate.lnk"
+createShorcut $shortcut1 "$DesktopPath\X44 CreateApplication.lnk"
+createShorcut $shortcut2 "$DesktopPath\X44 CreateTemplate.lnk"
